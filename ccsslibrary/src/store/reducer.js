@@ -30,6 +30,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         subjectid: action.subjectid
        }
+   }else if(action.type == "RESUMESUBJECTID"){
+
+       return {
+        ...state,
+        subjectid: ''
+       }
    }
  return state
 }

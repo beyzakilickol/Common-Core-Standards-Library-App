@@ -27,16 +27,42 @@ class Standards extends Component{
   }
 
 componentWillReceiveProps = (props)=>{
-  axios(`http://api.commonstandardsproject.com/api/v1/standard_sets/${props.subjectid}`,config).then((response)=>{
+  axios(`http://api.commonstandardsproject.com/api/v1/standard_sets/${props.subjectid}`,config).then((response)=>{   if(response.data.data.subject=='Mathematics' && response.data.data.title=='Grade 9'){
+    console.log('hey')
+    let standardArr=Object.values(response.data.data.standards)
+
+    let standardString=standardArr.map((each)=>{
+      return each.description.charAt(0).toUpperCase() + each.description.slice(1)
+
+    })
+
+    this.setState({
+      ...this.state,
+      standards: standardString.reverse()
+    })
+     this.props.resumeSubjectId()
+     this.setState({
+       ...this.state,
+       footer: <Footer/>
+     })
+  }else {
+    console.log('hey2')
        let standardArr=Object.values(response.data.data.standards)
+
        let standardString=standardArr.map((each)=>{
-         return each.statementNotation + ' : ' + each.description
+         return each.statementNotation + ' : ' + each.description.charAt(0).toUpperCase() + each.description.slice(1)
+
        })
        this.setState({
          ...this.state,
          standards: standardString.reverse()
        })
-
+     }
+     this.props.resumeSubjectId()
+     this.setState({
+       ...this.state,
+       footer: <Footer/>
+     })
   })
 }
 
@@ -57,7 +83,7 @@ componentWillReceiveProps = (props)=>{
          </div>
 
 </div>
-<Footer/>
+{this.state.footer}
 </div>
     )
   }
@@ -76,7 +102,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     // this.props.onIncrementCounter
-
+resumeSubjectId : (value) => dispatch({type: "RESUMESUBJECTID"})
   }
 }
 

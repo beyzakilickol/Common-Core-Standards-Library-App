@@ -97,25 +97,11 @@ getStandards = (e)=>{
           <MenuItem><Link to='/standards' onClick={()=>this.getStandards('English Language Arts and Reading')} className="hover">ELA</Link></MenuItem>
           </SubMenu>
           <Divider/>
-          <SubMenu onMouseEnter={()=>this.getGrade('Grade 9')} title={'Grade 9'}>
+          <SubMenu onMouseEnter={()=>this.getGrade('Grade 9')} title={'High School'}>
           <MenuItem><Link to='/standards' onClick={()=>this.getStandards('Mathematics')} className="hover">MATH</Link></MenuItem>
-          <MenuItem><Link to='/standards' onClick={()=>this.getStandards('English Language Arts and Reading')} className="hover">ELA</Link></MenuItem>
+
           </SubMenu>
-          <Divider/>
-          <SubMenu onMouseEnter={()=>this.getGrade('Grade 10')} title={'Grade 10'}>
-          <MenuItem><Link to='/standards' onClick={()=>this.getStandards('Mathematics')} className="hover">MATH</Link></MenuItem>
-          <MenuItem><Link to='/standards' onClick={()=>this.getStandards('English Language Arts and Reading')} className="hover">ELA</Link></MenuItem>
-          </SubMenu>
-          <Divider/>
-          <SubMenu onMouseEnter={()=>this.getGrade('Grade 11')} title={'Grade 11'}>
-          <MenuItem><Link to='/standards' onClick={()=>this.getStandards('Mathematics')} className="hover">MATH</Link></MenuItem>
-          <MenuItem><Link to='/standards' onClick={()=>this.getStandards('English Language Arts and Reading')} className="hover">ELA</Link></MenuItem>
-          </SubMenu>
-          <Divider/>
-            <SubMenu onMouseEnter={()=>this.getGrade('Grade 12')} title={'Grade 12'}>
-            <MenuItem><Link to='/standards' onClick={()=>this.getStandards('Mathematics')} className="hover">MATH</Link></MenuItem>
-            <MenuItem><Link to='/standards' onClick={()=>this.getStandards('English Language Arts and Reading')} className="hover">ELA</Link></MenuItem>
-            </SubMenu>
+
 
           </Menu>
       </div>
