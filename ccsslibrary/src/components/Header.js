@@ -22,13 +22,14 @@ class Header extends Component{
   render(){
           let withUser = ''
           let withoutUser = ''
+          let withoutUser2 = ''
           if(!this.props.token==''){
             withUser= <li className="nav-item dropdown"><a id="dropdown" className="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Welcome {this.props.username}</a>
                 <div className="dropdown-menu" role="menu"><a className="dropdown-item" role="presentation" href="#">Become a seller</a><a className="dropdown-item" role="presentation" href="#">My Purchases</a><a className="dropdown-item" role="presentation" href="#">My Wish List</a><Link to="/" onClick={this.logout} className="dropdown-item" role="presentation" href="#">Logout</Link></div></li>
 
           } else {
-            withoutUser =  <li className="nav-item mx-0 mx-lg-1" role="presentation"><Link to="/login" className="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">Login</Link></li>
-             <li className="nav-item mx-0 mx-lg-1" role="presentation"><Link to="/register" className="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" >get started</Link></li>
+            withoutUser =  <li className="loginItem nav-item mx-0 mx-lg-1" role="presentation"><Link to="/login" className="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">Login</Link></li>
+             withoutUser2= <li className="getstartedItem nav-item mx-0 mx-lg-1" role="presentation"><Link to="/register" className="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" >get started</Link></li>
           }
     return (
 
@@ -38,7 +39,7 @@ class Header extends Component{
                  data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i className="fa fa-bars"></i></button>
              <div className="collapse navbar-collapse" id="navbarResponsive">
                  <ul className="nav navbar-nav ml-auto">
-                    {withUser}{withoutUser}
+                    {withUser}{withoutUser}{withoutUser2}
 
                  </ul>
              </div>

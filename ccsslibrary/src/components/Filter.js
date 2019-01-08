@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-
+import {Link, NavLink} from 'react-router-dom'
 import Menu, { SubMenu, Item as MenuItem, Divider } from 'rc-menu';
 
 import 'rc-menu/assets/index.css';
 import axios from 'axios'
 import '../assets/css/filter.css'
 
+
+  let config = {headers: {
+    'Accept': 'application/json',
+    'Api-Key': 'hgvsDmBJtYaWJUkSCMUUJhYm',
+    'Content-Type': 'application/json',
+    'crossDomain': true,
+    "async": true
+}}
 
 class Filter extends Component{
   constructor(props){
@@ -23,7 +31,15 @@ getGrade =(e)=>{
       grade: e
     })
 }
-
+getStandards = (e)=>{
+  axios('http://commonstandardsproject.com/api/v1/jurisdictions/28903EF2A9F9469C9BF592D4D0BE10F8',config).then((response)=>{
+    let chosenStandard = response.data.data['standardSets'].filter((each)=>{
+      return each.title==this.state.grade && each.subject == e
+    })
+    console.log(chosenStandard[0].id)
+    this.props.getGradeSubjectId(chosenStandard[0].id)
+  })
+}
 
   render(){
 
@@ -37,68 +53,68 @@ getGrade =(e)=>{
           </MenuItem>
           <Divider/>
           <SubMenu onMouseEnter={()=>this.getGrade('Grade K')} title={'Grade K'}>
-          <MenuItem>MATH</MenuItem>
-          <MenuItem>ELA</MenuItem>
+          <MenuItem><Link to='/standards' onClick={()=>this.getStandards('Mathematics')} className="hover">MATH</Link></MenuItem>
+          <MenuItem><Link to='/standards' onClick={()=>this.getStandards('English Language Arts and Reading')} className="hover">ELA</Link></MenuItem>
           </SubMenu>
           <Divider/>
           <SubMenu onMouseEnter={()=>this.getGrade('Grade 1')} title={'Grade 1'}>
-          <MenuItem>MATH</MenuItem>
-          <MenuItem>ELA</MenuItem>
+          <MenuItem><Link to='/standards' onClick={()=>this.getStandards('Mathematics')} className="hover">MATH</Link></MenuItem>
+          <MenuItem><Link to='/standards' onClick={()=>this.getStandards('English Language Arts and Reading')} className="hover">ELA</Link></MenuItem>
           </SubMenu>
           <Divider/>
           <SubMenu onMouseEnter={()=>this.getGrade('Grade 2')} title={'Grade 2'}>
-          <MenuItem>MATH</MenuItem>
-          <MenuItem>ELA</MenuItem>
+          <MenuItem><Link to='/standards' onClick={()=>this.getStandards('Mathematics')} className="hover">MATH</Link></MenuItem>
+          <MenuItem><Link to='/standards' onClick={()=>this.getStandards('English Language Arts and Reading')} className="hover">ELA</Link></MenuItem>
           </SubMenu>
           <Divider/>
           <SubMenu onMouseEnter={()=>this.getGrade('Grade 3')} title={'Grade 3'}>
-          <MenuItem>MATH</MenuItem>
-          <MenuItem>ELA</MenuItem>
+          <MenuItem><Link to='/standards' onClick={()=>this.getStandards('Mathematics')} className="hover">MATH</Link></MenuItem>
+          <MenuItem><Link to='/standards' onClick={()=>this.getStandards('English Language Arts and Reading')} className="hover">ELA</Link></MenuItem>
           </SubMenu>
           <Divider/>
           <SubMenu onMouseEnter={()=>this.getGrade('Grade 4')} title={'Grade 4'}>
-          <MenuItem>MATH</MenuItem>
-          <MenuItem>ELA</MenuItem>
+          <MenuItem><Link to='/standards' onClick={()=>this.getStandards('Mathematics')} className="hover">MATH</Link></MenuItem>
+          <MenuItem><Link to='/standards' onClick={()=>this.getStandards('English Language Arts and Reading')} className="hover">ELA</Link></MenuItem>
           </SubMenu>
           <Divider/>
           <SubMenu onMouseEnter={()=>this.getGrade('Grade 5')} title={'Grade 5'}>
-          <MenuItem>MATH</MenuItem>
-          <MenuItem>ELA</MenuItem>
+          <MenuItem><Link to='/standards' onClick={()=>this.getStandards('Mathematics')} className="hover">MATH</Link></MenuItem>
+          <MenuItem><Link to='/standards' onClick={()=>this.getStandards('English Language Arts and Reading')} className="hover">ELA</Link></MenuItem>
           </SubMenu>
           <Divider/>
           <SubMenu onMouseEnter={()=>this.getGrade('Grade 6')} title={'Grade 6'}>
-          <MenuItem>MATH</MenuItem>
-          <MenuItem>ELA</MenuItem>
+          <MenuItem><Link to='/standards' onClick={()=>this.getStandards('Mathematics')} className="hover">MATH</Link></MenuItem>
+          <MenuItem><Link to='/standards' onClick={()=>this.getStandards('English Language Arts and Reading')} className="hover">ELA</Link></MenuItem>
           </SubMenu>
           <Divider/>
           <SubMenu onMouseEnter={()=>this.getGrade('Grade 7')} title={'Grade 7'}>
-          <MenuItem>MATH</MenuItem>
-          <MenuItem>ELA</MenuItem>
+          <MenuItem><Link to='/standards' onClick={()=>this.getStandards('Mathematics')} className="hover">MATH</Link></MenuItem>
+          <MenuItem><Link to='/standards' onClick={()=>this.getStandards('English Language Arts and Reading')} className="hover">ELA</Link></MenuItem>
           </SubMenu>
           <Divider/>
           <SubMenu onMouseEnter={()=>this.getGrade('Grade 8')} title={'Grade 8'}>
-          <MenuItem>MATH</MenuItem>
-          <MenuItem>ELA</MenuItem>
+          <MenuItem><Link to='/standards' onClick={()=>this.getStandards('Mathematics')} className="hover">MATH</Link></MenuItem>
+          <MenuItem><Link to='/standards' onClick={()=>this.getStandards('English Language Arts and Reading')} className="hover">ELA</Link></MenuItem>
           </SubMenu>
           <Divider/>
           <SubMenu onMouseEnter={()=>this.getGrade('Grade 9')} title={'Grade 9'}>
-          <MenuItem>MATH</MenuItem>
-          <MenuItem>ELA</MenuItem>
+          <MenuItem><Link to='/standards' onClick={()=>this.getStandards('Mathematics')} className="hover">MATH</Link></MenuItem>
+          <MenuItem><Link to='/standards' onClick={()=>this.getStandards('English Language Arts and Reading')} className="hover">ELA</Link></MenuItem>
           </SubMenu>
           <Divider/>
           <SubMenu onMouseEnter={()=>this.getGrade('Grade 10')} title={'Grade 10'}>
-          <MenuItem>MATH</MenuItem>
-          <MenuItem>ELA</MenuItem>
+          <MenuItem><Link to='/standards' onClick={()=>this.getStandards('Mathematics')} className="hover">MATH</Link></MenuItem>
+          <MenuItem><Link to='/standards' onClick={()=>this.getStandards('English Language Arts and Reading')} className="hover">ELA</Link></MenuItem>
           </SubMenu>
           <Divider/>
           <SubMenu onMouseEnter={()=>this.getGrade('Grade 11')} title={'Grade 11'}>
-          <MenuItem>MATH</MenuItem>
-          <MenuItem>ELA</MenuItem>
+          <MenuItem><Link to='/standards' onClick={()=>this.getStandards('Mathematics')} className="hover">MATH</Link></MenuItem>
+          <MenuItem><Link to='/standards' onClick={()=>this.getStandards('English Language Arts and Reading')} className="hover">ELA</Link></MenuItem>
           </SubMenu>
           <Divider/>
             <SubMenu onMouseEnter={()=>this.getGrade('Grade 12')} title={'Grade 12'}>
-            <MenuItem>MATH</MenuItem>
-            <MenuItem>ELA</MenuItem>
+            <MenuItem><Link to='/standards' onClick={()=>this.getStandards('Mathematics')} className="hover">MATH</Link></MenuItem>
+            <MenuItem><Link to='/standards' onClick={()=>this.getStandards('English Language Arts and Reading')} className="hover">ELA</Link></MenuItem>
             </SubMenu>
 
           </Menu>
@@ -157,7 +173,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     // this.props.onIncrementCounter
-
+getGradeSubjectId : (value) => dispatch({type: "SUBJECTID",subjectid: value})
   }
 }
 

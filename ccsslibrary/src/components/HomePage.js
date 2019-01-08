@@ -49,11 +49,11 @@ class HomePage extends Component {
      <section id="portfolio" className="portfolio cardMainContainer" >
          <aside></aside>
          <div className="container gradeContainer">
-             <h3 className="text-uppercase text-center text-secondary gradeSection" >Elementary School Popular Resources</h3>
-             <hr className="star-dark mb-5 starSign" />
+             <h3 className="text-uppercase text-center text-secondary gradeSection"> Elementary School Popular Resources</h3>
+             <hr className="star-dark mb-5 starSign"/>
              <div className="row">
-                 <div className="col cardDiv1" >
-                     <div className="cardDiv2" >
+                 <div className="col cardDiv1">
+                     <div className="cardDiv2">
                          <div className="container cardContainer">
                              <div className="cust_bloglistintro"></div>
                              <div className="row flex-nowrap">
