@@ -7,6 +7,7 @@ import Footer from './Footer'
 import Header from './Header'
 import HomePage from './HomePage'
 import Login from './Login'
+import Register from './Register'
 //------------css---------------
 import '../assets/bootstrap/css/bootstrap.min.css'
 import '../assets/fonts/font-awesome.min.css'

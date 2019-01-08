@@ -13,11 +13,16 @@ class Filter extends Component{
   constructor(props){
     super(props)
     this.state={
-
+           grade: ''
     }
   }
 
-
+getGrade =(e)=>{
+    this.setState({
+      ...this.state,
+      grade: e
+    })
+}
 
 
   render(){
@@ -31,76 +36,69 @@ class Filter extends Component{
           <MenuItem > Search by Standards
           </MenuItem>
           <Divider/>
-          <SubMenu title={'Grade 1'}>
-          <SubMenu title={'Math'} ><MenuItem>Standard</MenuItem></SubMenu>
-
-          <SubMenu title={'ELA'} ><MenuItem>Standard 2</MenuItem></SubMenu>
+          <SubMenu onMouseEnter={()=>this.getGrade('Grade K')} title={'Grade K'}>
+          <MenuItem>MATH</MenuItem>
+          <MenuItem>ELA</MenuItem>
           </SubMenu>
           <Divider/>
-          <SubMenu title={'Grade 2'}>
-          <SubMenu title={'Math'} ><MenuItem>Standard</MenuItem></SubMenu>
-
-          <SubMenu title={'ELA'} ><MenuItem>Standard 2</MenuItem></SubMenu>
+          <SubMenu onMouseEnter={()=>this.getGrade('Grade 1')} title={'Grade 1'}>
+          <MenuItem>MATH</MenuItem>
+          <MenuItem>ELA</MenuItem>
           </SubMenu>
           <Divider/>
-          <SubMenu title={'Grade 3'}>
-          <SubMenu title={'Math'} ><MenuItem>Standard</MenuItem></SubMenu>
-
-          <SubMenu title={'ELA'} ><MenuItem>Standard 2</MenuItem></SubMenu>
+          <SubMenu onMouseEnter={()=>this.getGrade('Grade 2')} title={'Grade 2'}>
+          <MenuItem>MATH</MenuItem>
+          <MenuItem>ELA</MenuItem>
           </SubMenu>
           <Divider/>
-          <SubMenu title={'Grade 4'}>
-          <SubMenu title={'Math'} ><MenuItem>Standard</MenuItem></SubMenu>
-
-          <SubMenu title={'ELA'} ><MenuItem>Standard 2</MenuItem></SubMenu>
+          <SubMenu onMouseEnter={()=>this.getGrade('Grade 3')} title={'Grade 3'}>
+          <MenuItem>MATH</MenuItem>
+          <MenuItem>ELA</MenuItem>
           </SubMenu>
           <Divider/>
-          <SubMenu title={'Grade 5'}>
-          <SubMenu title={'Math'} ><MenuItem>Standard</MenuItem></SubMenu>
-
-          <SubMenu title={'ELA'} ><MenuItem>Standard 2</MenuItem></SubMenu>
+          <SubMenu onMouseEnter={()=>this.getGrade('Grade 4')} title={'Grade 4'}>
+          <MenuItem>MATH</MenuItem>
+          <MenuItem>ELA</MenuItem>
           </SubMenu>
           <Divider/>
-          <SubMenu title={'Grade 6'}>
-          <SubMenu title={'Math'} ><MenuItem>Standard</MenuItem></SubMenu>
-
-          <SubMenu title={'ELA'} ><MenuItem>Standard 2</MenuItem></SubMenu>
+          <SubMenu onMouseEnter={()=>this.getGrade('Grade 5')} title={'Grade 5'}>
+          <MenuItem>MATH</MenuItem>
+          <MenuItem>ELA</MenuItem>
           </SubMenu>
           <Divider/>
-          <SubMenu title={'Grade 7'}>
-          <SubMenu title={'Math'} ><MenuItem>Standard</MenuItem></SubMenu>
-
-          <SubMenu title={'ELA'} ><MenuItem>Standard 2</MenuItem></SubMenu>
+          <SubMenu onMouseEnter={()=>this.getGrade('Grade 6')} title={'Grade 6'}>
+          <MenuItem>MATH</MenuItem>
+          <MenuItem>ELA</MenuItem>
           </SubMenu>
           <Divider/>
-          <SubMenu title={'Grade 8'}>
-          <SubMenu title={'Math'} ><MenuItem>Standard</MenuItem></SubMenu>
-
-          <SubMenu title={'ELA'} ><MenuItem>Standard 2</MenuItem></SubMenu>
+          <SubMenu onMouseEnter={()=>this.getGrade('Grade 7')} title={'Grade 7'}>
+          <MenuItem>MATH</MenuItem>
+          <MenuItem>ELA</MenuItem>
           </SubMenu>
           <Divider/>
-          <SubMenu title={'Grade 9'}>
-          <SubMenu title={'Math'} ><MenuItem>Standard</MenuItem></SubMenu>
-
-          <SubMenu title={'ELA'} ><MenuItem>Standard 2</MenuItem></SubMenu>
+          <SubMenu onMouseEnter={()=>this.getGrade('Grade 8')} title={'Grade 8'}>
+          <MenuItem>MATH</MenuItem>
+          <MenuItem>ELA</MenuItem>
           </SubMenu>
           <Divider/>
-          <SubMenu title={'Grade 10'}>
-          <SubMenu title={'Math'} ><MenuItem>Standard</MenuItem></SubMenu>
-
-          <SubMenu title={'ELA'} ><MenuItem>Standard 2</MenuItem></SubMenu>
+          <SubMenu onMouseEnter={()=>this.getGrade('Grade 9')} title={'Grade 9'}>
+          <MenuItem>MATH</MenuItem>
+          <MenuItem>ELA</MenuItem>
           </SubMenu>
           <Divider/>
-          <SubMenu title={'Grade 11'}>
-          <SubMenu title={'Math'} ><MenuItem>Standard</MenuItem></SubMenu>
-
-          <SubMenu title={'ELA'} ><MenuItem>Standard 2</MenuItem></SubMenu>
+          <SubMenu onMouseEnter={()=>this.getGrade('Grade 10')} title={'Grade 10'}>
+          <MenuItem>MATH</MenuItem>
+          <MenuItem>ELA</MenuItem>
           </SubMenu>
           <Divider/>
-            <SubMenu title={'Grade 12'}>
-            <SubMenu title={'Math'} ><MenuItem>Standard</MenuItem></SubMenu>
-
-            <SubMenu title={'ELA'} ><MenuItem>Standard 2</MenuItem></SubMenu>
+          <SubMenu onMouseEnter={()=>this.getGrade('Grade 11')} title={'Grade 11'}>
+          <MenuItem>MATH</MenuItem>
+          <MenuItem>ELA</MenuItem>
+          </SubMenu>
+          <Divider/>
+            <SubMenu onMouseEnter={()=>this.getGrade('Grade 12')} title={'Grade 12'}>
+            <MenuItem>MATH</MenuItem>
+            <MenuItem>ELA</MenuItem>
             </SubMenu>
 
           </Menu>

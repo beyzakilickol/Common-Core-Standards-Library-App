@@ -9,7 +9,7 @@ const pgp= require('pg-promise')()
 const connectionString= {
     "host": "localhost",
     "port": 5432,
-    "database": "comprof",
+    "database": "ccss",
     "user": "postgres"
   };
 
@@ -31,3 +31,51 @@ app.listen(PORT, function(){
   console.log('Server is running...')
 })
 //---------------------------------------------------------------
+app.post('/api/register',function(req,res){
+  let username = req.body.username
+  let email = req.body.email
+  let password = req.body.password
+  let userType = 'regular'
+  db.one('SELECT userid,username,email,password,usertype FROM users WHERE email = $1',[email]).then((user)=>{
+ console.log(user)
+ res.json('This email is already taken. Please try with different credential!')
+
+ }).catch((error)=>{
+ console.log(error)
+ if(error.code == 42703 || error.received == 0){
+   bcrypt.hash(password, 10, function(err, hash) {
+
+         if(hash) {
+             db.none('INSERT INTO users (username,email,password,usertype) VALUES ($1,$2,$3,$4)',[username,email,hash,userType]).then(()=>{
+               res.json({success: true})
+             })
+
+         }
+
+     })
+   }
+})
+})
+app.post('/api/login',function(req,res){
+  let email = req.body.email
+  let password = req.body.password
+  console.log(email)
+  console.log(password)
+  db.one('SELECT userid,email,password,username,usertype FROM users WHERE email = $1',[email]).then((response)=>{
+    console.log(response)
+    bcrypt.compare(password,response.password,function(error,result){
+      if(result) {
+        const token = jwt.sign({ id : response.userid },"somesecretkey")
+        res.json({token: token, user: response})
+      } else {
+        res.json('The password you entered is incorrect!')
+      }
+    })
+}).catch((error)=>{
+  console.log(error)
+if(error.received == 0){
+   res.json('The email you entered is invalid!')
+  }
+})
+
+})

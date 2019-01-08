@@ -12,6 +12,7 @@ import HomePage from './components/HomePage'
 import Footer from './components/Footer'
 import BaseLayout from './components/BaseLayout'
 import Login from './components/Login'
+import Register from './components/Register'
 //import Header from './components/Header'
 import {persistor, store} from './store/configureStore'
 
@@ -25,6 +26,7 @@ ReactDOM.render(<Provider store = {store}>
     <Switch>
       <Route exact path="/" component={HomePage} />
       <Route path="/login" component={Login} />
+      <Route path="/register" component={Register} />
 
 
     </Switch>

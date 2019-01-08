@@ -107,7 +107,7 @@ class HomePage extends Component {
          </div>
      </section>
 
-     <Footer style={{height:'30px', paddingTop:'30px'}}/>
+     <Footer />
 
       </div>
     )
