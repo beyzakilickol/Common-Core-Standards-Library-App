@@ -14,6 +14,7 @@ import BaseLayout from './components/BaseLayout'
 import Login from './components/Login'
 import Register from './components/Register'
 import Standards from './components/Standards'
+import ListProduct from './components/ListProduct'
 //import Header from './components/Header'
 import {persistor, store} from './store/configureStore'
 
@@ -29,6 +30,7 @@ ReactDOM.render(<Provider store = {store}>
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <Route path="/standards" component={Standards} />
+      <Route path="/listproduct" component={ListProduct} />
 
 
     </Switch>

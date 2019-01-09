@@ -27,6 +27,7 @@ class Standards extends Component{
   }
 
 componentWillReceiveProps = (props)=>{
+  if(!props.subjectid==''){
   axios(`http://api.commonstandardsproject.com/api/v1/standard_sets/${props.subjectid}`,config).then((response)=>{   if(response.data.data.subject=='Mathematics' && response.data.data.title=='Grade 9'){
     console.log('hey')
     let standardArr=Object.values(response.data.data.standards)
@@ -65,6 +66,7 @@ componentWillReceiveProps = (props)=>{
      })
   })
 }
+}
 
   render(){
     let orderedStandards=this.state.standards.map((each)=>{
@@ -72,6 +74,27 @@ componentWillReceiveProps = (props)=>{
     })
     return (
       <div>
+      <header className="masthead bg-primary text-white text-center searchheader" >
+
+
+            <ul className="listItemUl">
+              <li className="listItemHeader">Home</li>
+              <li className="listItemHeader">About Us</li>
+              <li className="listItemHeader">Help</li>
+              <li className="listItemHeader">Schools</li>
+              <hr />
+            </ul>
+
+
+          <div className="row padMar">
+              <div className="col padMar">
+                  <div className="input-group">
+                      <div className="input-group-prepend"></div><input className="form-control autocomplete searchbar" type="text" placeholder="Search  by  title  or  resource  type" />
+                      <div className="input-group-append"><button className="btn btn-warning searchbtn" type="button" ><i className="fa fa-search"></i></button></div>
+                  </div>
+              </div>
+          </div>
+      </header>
          <div className="main-container">
          <div className="filterStandard-container">
         <Filter/>
