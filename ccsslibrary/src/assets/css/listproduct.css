@@ -53,6 +53,7 @@
   display:flex;
   width: 80%;
   height:100%;
+  margin-left: 16rem !important;
   color:black !important;
   text-align: center;
 }
@@ -61,7 +62,45 @@
 }
 .resourcecontainer{
   width: 200px;
+  display: flex !important;
+  flex-direction: column !important;
+  margin-left: 6.5rem !important;
 }
 .resource{
   display: flex;
+}
+.inputContainer{
+  display: flex !important;
+  flex-direction: row !important;
+  width: 35rem;
+}
+.resourceHeading{
+  width: 15rem !important;
+  margin-left: 7rem !important;
+  font-weight: bolder;
+  font-size: 18px;
+}
+.resourceHeading2{
+  width: 15rem !important;
+  margin-left: 6rem !important;
+  font-weight: bolder;
+  font-size: 18px;
+}
+.uploadFile{
+  font-weight: bolder;
+  font-size: 18px;
+}
+.priceInput{
+  border-width: thin !important;
+  border-radius: 5%;
+  border-color: #626466 !important;
+  height: 3rem !important;
+  width: 7rem !important;
+  margin-left: 10rem !important;
+  margin-bottom: 3rem !important;
+}
+.itemSubmitBtn{
+  margin-bottom: 9rem !important;
+  margin-left: 8rem !important;
+  width: 11rem !important;
 }

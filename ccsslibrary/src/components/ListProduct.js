@@ -139,6 +139,8 @@ class ListProduct extends Component {
     styles = isDragReject ? {...styles, ...rejectStyle} : styles
 
     return (
+      <div>
+      <p className="uploadFile">Upload your file</p>
       <div
         {...getRootProps()}
         style={styles}
@@ -155,21 +157,32 @@ class ListProduct extends Component {
         {isDragReject && <div className="hideframe">Unsupported file type...</div>}
 
       </div>
+      </div>
     )
   }}
-</Dropzone>
-<div className="resource">
-<div className="resourcecontainer">
- <label ><input className="resourcetype" type="radio" name="resourcetype"/>Activities</label><br/>
- <label ><input className="resourcetype" type="radio" name="resourcetype"/>Worksheets</label><br/>
- <label ><input className="resourcetype" type="radio" name="resourcetype"/>Assessments</label><br/>
 
-</div>
-<div className="resourcecontainer">
-<label ><input className="resourcetype" type="radio" name="resourcetype"/>Projects</label><br/>
-<label ><input className="resourcetype" type="radio" name="resourcetype"/>Posters</label>
-</div>
-</div>
+</Dropzone>
+
+
+      <div className="resourcecontainer">
+        <label className="resourceHeading">Choose Resource Type</label>
+        <div className="inputContainer">
+        <input type="radio" name="resource" value=""/>Activities<br/>
+         <input type="radio" name="resource" value=""/>Worksheets<br/>
+          <input type="radio" name="resource" value=""/>Assessments<br/>
+           <input type="radio" name="resource" value=""/>Projects<br/>
+            <input type="radio" name="resource" value=""/>Posters<br/>
+            </div>
+
+            <label className="resourceHeading2">Price</label>
+
+           <input className="priceInput" type="text" placeholder="&nbsp;&nbsp;$ &nbsp;&nbsp;0" />
+
+           <button type="button" className="btn btn-primary btn-lg itemSubmitBtn">Publish Item</button>
+
+
+      </div>
+
      </div>
       </div>
 
