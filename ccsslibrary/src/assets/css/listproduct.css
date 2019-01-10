@@ -104,3 +104,22 @@
   margin-left: 8rem !important;
   width: 11rem !important;
 }
+#standardsSelectDropdown{
+  width: 80% !important;
+
+}
+.notranslate{
+  overflow: scroll !important;
+  height: 250px !important;
+}
+.public-DraftStyleDefault-block{
+
+}
+#standardLabel{
+  text-align: center;
+
+}
+embed #plugin{
+  margin-top: -60px !important;
+    height: 300px !important;
+}

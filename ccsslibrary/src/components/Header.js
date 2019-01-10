@@ -23,9 +23,20 @@ class Header extends Component{
           let withUser = ''
           let withoutUser = ''
           let withoutUser2 = ''
+          let withSellerUser = ''
+          let withRegularUser = ''
+          if(this.props.usertype == 'regular'){
+            withRegularUser = <div className="cartWrapper"><div className="dropdown-menu userDropdown" role="menu"><Link to="/sellerregistration" className="dropdown-item">Become a seller</Link><Link to="/sellerpurchases" className="dropdown-item">My Purchases</Link><Link to="/sellerwishlist" className="dropdown-item">My Wish List</Link><Link to="/" onClick={this.logout} className="dropdown-item" role="presentation" href="#">Logout</Link></div><span className="fa-stack fa-x has-badge cartImg" data-count=""><Link to=''><i className="fa fa-shopping-cart number">{this.props.cartcount}</i></Link>
+            </span></div>
+          } else {
+            withSellerUser = <div className="cartWrapper"><div className="dropdown-menu userDropdown" role="menu"><Link to="/listproduct" className="dropdown-item">List a product</Link><Link to="/sellerregistration" className="dropdown-item">My products</Link><Link to="/sellerpurchases" className="dropdown-item">My Purchases</Link><Link to="/sellerwishlist" className="dropdown-item">My Wish List</Link><Link to="/" onClick={this.logout} className="dropdown-item" role="presentation" href="#">Logout</Link></div><span className="fa-stack fa-x has-badge cartImg" data-count=""><Link to=''><i className="fa fa-shopping-cart number">{this.props.cartcount}</i></Link>
+            </span></div>
+          }
           if(!this.props.token==''){
             withUser= <li className="nav-item dropdown"><a id="dropdown" className="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Welcome {this.props.username}</a>
-                <div className="dropdown-menu" role="menu"><a className="dropdown-item" role="presentation" href="#">Become a seller</a><a className="dropdown-item" role="presentation" href="#">My Purchases</a><a className="dropdown-item" role="presentation" href="#">My Wish List</a><Link to="/" onClick={this.logout} className="dropdown-item" role="presentation" href="#">Logout</Link></div></li>
+              {withSellerUser}{withRegularUser}
+            </li>
+
 
           } else {
             withoutUser =  <li className="loginItem nav-item mx-0 mx-lg-1" role="presentation"><Link to="/login" className="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger">Login</Link></li>
@@ -35,7 +46,7 @@ class Header extends Component{
 
 
      <nav className="navbar navbar-light navbar-expand-lg fixed-top bg-secondary text-uppercase" id="mainNav">
-         <div className="container"><Link to="/" className="navbar-brand js-scroll-trigger"><img id="logo" src={ccsslogo}/></Link><button className="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" data-toggle="collapse"
+         <div className="container headercontainer"><Link to="/" className="navbar-brand js-scroll-trigger"><img id="logo" src={ccsslogo}/></Link><button className="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" data-toggle="collapse"
                  data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i className="fa fa-bars"></i></button>
              <div className="collapse navbar-collapse" id="navbarResponsive">
                  <ul className="nav navbar-nav ml-auto">
@@ -57,7 +68,9 @@ const mapStateToProps = (state) => {
   return {
     //ctr: state.counter // this.props.ctr
      username: state.username,
-     token: state.token
+     token: state.token,
+     usertype : state.userType,
+     cartcount : state.cartcount
   }
 }
 

@@ -21,7 +21,7 @@ class Footer extends Component{
     return (
       <div style={this.props.style}>
       <footer  className="footer text-center">
-          <div className="container">
+          <div className="">
               <div className="row">
                   <div className="col-md-4 mb-5 mb-lg-0">
                       <h4 className="text-uppercase mb-4"><img id="logoFooter" src={ccsslogo} /></h4>
@@ -42,7 +42,7 @@ class Footer extends Component{
           </div>
       </footer>
       <div className="copyright py-4 text-center text-white">
-          <div className="container"><small>Copyright © Common Core Library &nbsp;2018</small></div>
+          <div className=""><small>Copyright © Common Core Library &nbsp;2018</small></div>
       </div>
       </div>
     )

@@ -1,6 +1,7 @@
 let token = localStorage.getItem('jsonwebtoken')
 
 const initialState = {
+
   token: token? token: '',
    username:'',
    userType: '',
@@ -11,13 +12,18 @@ const reducer = (state = initialState, action) => {
   if(action.type == "AUTHENTICATED"){
     return {
       ...state,
-      token : action.token}
-    } else if(action.type == "USER"){
+      token: action.token,
+
+}
+}
+     else if(action.type == "USER"){
       return {
         ...state,
         username : action.user.username,
         userType: action.user.usertype,
-        userid: action.user.userid}
+        userid: action.user.userid,
+        cartcount: action.user.cartcount
+      }
 
    }else if(action.type == "DELETETOKEN"){
 
@@ -35,6 +41,19 @@ const reducer = (state = initialState, action) => {
        return {
         ...state,
         subjectid: ''
+       }
+   }
+   else if(action.type == "UPDATEUSERTYPE"){
+
+       return {
+        ...state,
+        userType: 'seller'
+       }
+   }else if(action.type == "EDITORVALUE"){
+
+       return {
+        ...state,
+        editorvalue: action.editorvalue
        }
    }
  return state

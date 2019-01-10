@@ -48,7 +48,7 @@ class HomePage extends Component {
 
      <section id="portfolio" className="portfolio cardMainContainer" >
          <aside></aside>
-         <div className="container gradeContainer">
+         <div className="gradeContainer">
              <h3 className="text-uppercase text-center text-secondary gradeSection"> Elementary School Popular Resources</h3>
              <hr className="star-dark mb-5 starSign"/>
              <div className="row">
@@ -67,7 +67,7 @@ class HomePage extends Component {
          </div>
          </div>
          </div>
-         <div className="container">
+         <div className="">
              <h3 className="text-uppercase text-center text-secondary gradeSection" >Middle School Popular Resources</h3>
              <hr className="star-dark mb-5 starSign" />
              <div className="row">
@@ -86,7 +86,7 @@ class HomePage extends Component {
          </div>
          </div>
          </div>
-         <div className="container">
+         <div className="">
              <h3 className="text-uppercase text-center text-secondary gradeSection" >High School Popular Resources</h3>
              <hr className="star-dark mb-5 starSign" />
              <div className="row">

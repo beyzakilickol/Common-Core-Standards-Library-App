@@ -7,6 +7,15 @@ import Dropzone from 'react-dropzone'
 import request from "superagent";
 import classNames from 'classnames'
 import MyStatefulEditor from './MyStatefulEditor'
+import axios from 'axios'
+
+let config = {headers: {
+  'Accept': 'application/json',
+  'Api-Key': 'hgvsDmBJtYaWJUkSCMUUJhYm',
+  'Content-Type': 'application/json',
+  'crossDomain': true,
+  "async": true
+}}
 
 const baseStyle = {
   width: 200,
@@ -62,8 +71,16 @@ class ListProduct extends Component {
   constructor(props){
     super(props)
     this.state = {
+      description: this.props.editorvalue
        files:[],
-
+       grade:'',
+       subject: '',
+       standards: [],
+       standard: '',
+       keywords:'',
+       title: '',
+       resourcetype:'',
+       price: 0
     }
 
   }
@@ -76,15 +93,127 @@ class ListProduct extends Component {
       files: files.map(file => Object.assign(file, {
         preview: URL.createObjectURL(file)
       }))
-    });
+    },function(){console.log(this.state.files)});
+
    }
    componentWillUnmount() {
      // Make sure to revoke the data uris to avoid memory leaks
      this.state.files.forEach(file => URL.revokeObjectURL(file.preview))
    }
+  getGrade = (e)=>{
+    this.setState({
+      ...this.state,
+      grade : e.target.value
+    })
+  }
+  getSubject = (e)=>{
+    this.setState({
+      ...this.state,
+      subject: e.target.value
+    })
+    axios('http://commonstandardsproject.com/api/v1/jurisdictions/28903EF2A9F9469C9BF592D4D0BE10F8',config).then((response)=>{
+      let chosenStandard = response.data.data['standardSets'].filter((each)=>{
+        return each.title==this.state.grade && each.subject == this.state.subject
+      })
+      console.log(chosenStandard[0].id)
+      this.setState({
+        ...this.state,
+        subjectid:chosenStandard[0].id
+      })
+    }).then((res)=>{
+      axios(`http://api.commonstandardsproject.com/api/v1/standard_sets/${this.state.subjectid}`,config).then((response)=>{   if(response.data.data.subject=='Mathematics' && response.data.data.title=='Grade 9'){
+        console.log('hey')
+        let standardArr=Object.values(response.data.data.standards)
 
+        let standardString=standardArr.map((each)=>{
+          return each.description.charAt(0).toUpperCase() + each.description.slice(1)
+
+        })
+
+        this.setState({
+          ...this.state,
+          standards: standardString.reverse()
+        })
+      }
+      else {
+        console.log('hey2')
+           let standardArr=Object.values(response.data.data.standards)
+
+           let standardString=standardArr.map((each)=>{
+             return each.statementNotation + ' : ' + each.description.charAt(0).toUpperCase() + each.description.slice(1)
+
+           })
+           this.setState({
+             ...this.state,
+             standards: standardString.reverse()
+           })
+         }
+    })
+  })
+}
+getStandard = (e) =>{
+  this.setState({
+    ...this.state,
+    standard: e.target.value
+  })
+}
+getTitle = (e) =>{
+  this.setState({
+    ...this.state,
+    title: e.target.value
+  })
+}
+getKeywords = (e) =>{
+  this.setState({
+    ...this.state,
+    keywords: e.target.value
+  })
+}
+getResourceType =(e)=>{
+  if(e.target.checked ==true){
+    this.setState({
+      ...this.state,
+      resourcetype: e.target.value
+    })
+  }
+}
+getPrice = (e)=>{
+  this.setState({
+    ...this.state,
+    price: e.target.value
+  })
+}
+sendItem=()=>{
+  var data = new FormData();
+data.append('file', this.state.files[0]);
+fetch('http://localhost:3001/upload', {
+      method: 'POST',
+      body: data,
+    }).then((response) => {
+      response.json().then((body) => {
+        console.log(body)
+        this.setState({
+          ...this.state,
+          fileURL: `http://localhost:3001/${body.file}` });
+      });
+    });
+  axios.post('http://localhost:3001/api/listproduct',{
+
+    grade:this.state.grade,
+    subject: this.state.subject,
+    standard: this.state.standard,
+    keywords: this.state.keywords,
+    title: this.state.title,
+    resourcetype:this.state.resourcetype,
+    price: this.state.price
+  }).then((response)=>{
+    console.log(response)
+  })
+}
   render() {
-
+  let standards = this.state.standards.map((standard)=>{
+    return <option value={standard}>{standard}</option>
+  })
   const {files} = this.state;
   const thumbs = files.map(file => (
     <div style={thumb} key={file.name}>
@@ -98,10 +227,10 @@ class ListProduct extends Component {
       <div>
       <div className="listproductContainer">
       <h2>Create A New Product</h2>
-      <label>Product Title<input type="text" placeholder="Enter title of the product"></input></label>
-      <label>Keywords &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" placeholder="Enter keywords for buyers to search for your product"></input></label>
+      <label>Product Title<input onChange={this.getTitle} type="text" placeholder="Enter title of the product"></input></label>
+      <label>Keywords &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input onChange={this.getKeywords} type="text" placeholder="Enter keywords for buyers to search for your product"></input></label>
       <label>Select grade:
-    <select id="gradeSelectDropdown">
+    <select onChange={this.getGrade} id="gradeSelectDropdown">
      <option disabled selected >Select an option</option>
       <option value='Grade K'>Grade K</option>
       <option value='Grade 1'>Grade 1</option>
@@ -116,17 +245,17 @@ class ListProduct extends Component {
 
      </select>  </label>
      <label>Select subject:
-     <select id="subjectSelectDropdown">
+     <select onChange={this.getSubject} id="subjectSelectDropdown">
      <option disabled selected >Select an option</option>
      <option value='Mathematics'>Math</option>
      <option value='English Language Arts and Reading'>ELA</option>
      </select>
 
      </label>
-     <label> Select standards:
-     <select id="standardsSelectDropdown">
+     <label id="standardLabel"> Select standards:
+     <select onChange={this.getStandard} id="standardsSelectDropdown">
      <option disabled selected >Select an option</option>
-
+      {standards}
      </select>
      </label>
      <p className="description">Description of your product. Please be specific</p>
@@ -164,21 +293,22 @@ class ListProduct extends Component {
 </Dropzone>
 
 
+
       <div className="resourcecontainer">
         <label className="resourceHeading">Choose Resource Type</label>
         <div className="inputContainer">
-        <input type="radio" name="resource" value=""/>Activities<br/>
-         <input type="radio" name="resource" value=""/>Worksheets<br/>
-          <input type="radio" name="resource" value=""/>Assessments<br/>
-           <input type="radio" name="resource" value=""/>Projects<br/>
-            <input type="radio" name="resource" value=""/>Posters<br/>
+        <input onChange={this.getResourceType} type="radio" name="resource" value="Activities"/>Activities<br/>
+         <input onChange={this.getResourceType} type="radio" name="resource" value="Worksheets"/>Worksheets<br/>
+          <input onChange={this.getResourceType} type="radio" name="resource" value="Assessments"/>Assessments<br/>
+           <input onChange={this.getResourceType} type="radio" name="resource" value="Projects"/>Projects<br/>
+            <input onChange={this.getResourceType} type="radio" name="resource" value="Posters"/>Posters<br/>
             </div>
 
             <label className="resourceHeading2">Price</label>
 
-           <input className="priceInput" type="text" placeholder="&nbsp;&nbsp;$ &nbsp;&nbsp;0" />
+           <input onChange={this.getPrice} className="priceInput" type="text" placeholder="&nbsp;&nbsp;$ &nbsp;&nbsp;0" />
 
-           <button type="button" className="btn btn-primary btn-lg itemSubmitBtn">Publish Item</button>
+           <button onClick={this.sendItem} type="button" className="btn btn-primary btn-lg itemSubmitBtn">Publish Item</button>
 
 
       </div>
@@ -196,7 +326,7 @@ class ListProduct extends Component {
 // map global state to local props
 const mapStateToProps = (state) => {
   return {
-
+      editorvalue: state.editorvalue
      //this.props.isAuthenticated
     //ctr: state.counter // this.props.ctr
   }
@@ -208,7 +338,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     // this.props.onIncrementCounter
-
+// getGradeSubjectId : (value) => dispatch({type: "SUBJECTID",subjectid: value})
 
   }
 }

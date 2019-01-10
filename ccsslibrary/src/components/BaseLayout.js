@@ -10,6 +10,7 @@ import Login from './Login'
 import Register from './Register'
 import Standards from './Standards'
 import ListProduct from './ListProduct'
+import SellerRegistration from './SellerRegistration'
 //------------css---------------
 import '../assets/bootstrap/css/bootstrap.min.css'
 import '../assets/fonts/font-awesome.min.css'
