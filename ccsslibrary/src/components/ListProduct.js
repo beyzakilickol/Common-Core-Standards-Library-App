@@ -71,7 +71,7 @@ class ListProduct extends Component {
   constructor(props){
     super(props)
     this.state = {
-      description: this.props.editorvalue
+
        files:[],
        grade:'',
        subject: '',
@@ -183,6 +183,9 @@ getPrice = (e)=>{
     price: e.target.value
   })
 }
+deletefile=()=>{
+// console.log(this.refs.fileInput)
+}
 sendItem=()=>{
   var data = new FormData();
 data.append('file', this.state.files[0]);
@@ -196,9 +199,10 @@ fetch('http://localhost:3001/upload', {
           ...this.state,
           fileURL: `http://localhost:3001/${body.file}` });
       });
-    });
-  axios.post('http://localhost:3001/api/listproduct',{
-
+    }).then((res)=>{axios.post('http://localhost:3001/api/listproduct',{
+    fileurl:this.state.fileURL,
+    userid: this.props.userid,
+    description: this.props.editorvalue,
     grade:this.state.grade,
     subject: this.state.subject,
     standard: this.state.standard,
@@ -207,8 +211,9 @@ fetch('http://localhost:3001/upload', {
     resourcetype:this.state.resourcetype,
     price: this.state.price
   }).then((response)=>{
-    console.log(response)
-  })
+    console.log(response.data)
+
+  }) })
 }
   render() {
   let standards = this.state.standards.map((standard)=>{
@@ -269,7 +274,7 @@ fetch('http://localhost:3001/upload', {
 
     return (
       <div>
-      <p className="uploadFile">Upload your file</p>
+      <p className="uploadFile">Upload your file  </p>
       <div
         {...getRootProps()}
         style={styles}
@@ -286,6 +291,7 @@ fetch('http://localhost:3001/upload', {
         {isDragReject && <div className="hideframe">Unsupported file type...</div>}
 
       </div>
+      <button onClick={this.deletefile} className="btn btn-primary">Remove the file</button>
       </div>
     )
   }}
@@ -326,7 +332,8 @@ fetch('http://localhost:3001/upload', {
 // map global state to local props
 const mapStateToProps = (state) => {
   return {
-      editorvalue: state.editorvalue
+      editorvalue: state.editorvalue,
+      userid: state.userid
      //this.props.isAuthenticated
     //ctr: state.counter // this.props.ctr
   }

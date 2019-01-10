@@ -95,8 +95,8 @@ app.post('/api/sellerregister',function(req,res){
 
 })
 app.post('/api/listproduct',function(req,res){
-
-
+  let rating = 'No rating yet'
+  let description = req.body.description
   let grade=req.body.grade
   let subject=req.body.subject
   let standard=req.body.standard
@@ -104,7 +104,12 @@ app.post('/api/listproduct',function(req,res){
   let title=req.body.title
   let resourcetype=req.body.resourcetype
   let price=req.body.price
-
+  let userid = req.body.userid
+  let fileurl = req.body.fileurl
+  console.log(fileurl)
+db.none('insert into sellerproducts (rating,description,grade,subject,standard,keywords,title,resourcetype,price,userid,fileurl) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)',[rating,description,grade,subject,standard,keywords,title,resourcetype,price,userid,fileurl]).then(()=>{
+  res.json({success:true})
+})
 
 
 })
