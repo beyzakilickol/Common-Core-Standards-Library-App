@@ -55,6 +55,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         editorvalue: action.editorvalue
        }
+   }else if(action.type == "PRODUCTID"){
+
+       return {
+        ...state,
+        productid: action.productid
+       }
    }
  return state
 }

@@ -12,6 +12,7 @@ import Standards from './Standards'
 import ListProduct from './ListProduct'
 import Aboutus from './Aboutus'
 import SellerRegistration from './SellerRegistration'
+import ProductWholeInfo from './ProductWholeInfo'
 //------------css---------------
 import '../assets/bootstrap/css/bootstrap.min.css'
 import '../assets/fonts/font-awesome.min.css'

@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "draft-js": "^0.10.5",
+    "hide-scrollbar-react": "^1.1.5",
     "history": "^4.7.2",
     "rc-menu": "^7.4.21",
     "react": "^16.7.0",

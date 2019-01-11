@@ -19,6 +19,8 @@ const jwt = require('jsonwebtoken')
 app.use(cors())
 // parse application/json
 app.use(bodyParser.json())
+
+app.use('/pdfFiles',express.static('pdfFiles'))
 app.use(fileUpload());
 app.use(function(req, res, next) {
   //
@@ -107,8 +109,11 @@ app.post('/api/listproduct',function(req,res){
   let userid = req.body.userid
   let fileurl = req.body.fileurl
   console.log(fileurl)
-db.none('insert into sellerproducts (rating,description,grade,subject,standard,keywords,title,resourcetype,price,userid,fileurl) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)',[rating,description,grade,subject,standard,keywords,title,resourcetype,price,userid,fileurl]).then(()=>{
-  res.json({success:true})
+db.one('insert into sellerproducts (rating,description,grade,subject,standard,keywords,title,resourcetype,price,userid,fileurl) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) returning productid',[rating,description,grade,subject,standard,keywords,title,resourcetype,price,userid,fileurl]).then((response)=>{
+  // db.one('select productid from sellerproducts where fileurl=$1',[fileurl]).then((response)=>{
+    res.json({success:true,productid:response.productid})
+  //})
+
 })
 
 
@@ -136,7 +141,13 @@ let uniqueid = guid()
         return res.status(500).send(err);
       }
 
-      res.json({file: `pdfFiles/${uniqueid}.pdf`});
+      res.json({file: `pdfFiles/${uniqueid}.pdf#scrollbar=0&toolbar=0&pagemode=thumbs&zoom=50&view=FitH&navpanes=0`});
     });
 
+})
+app.get('/api/:productid',function(req,res){
+  let productid = req.params.productid
+  db.one('select * from sellerproducts where productid=$1',[productid]).then((response)=>{
+    res.json(response)
+  })
 })
