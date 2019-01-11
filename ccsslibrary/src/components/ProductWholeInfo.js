@@ -8,7 +8,8 @@ import Footer from './Footer'
 import axios from 'axios'
 import '../assets/css/filter.css'
 import '../assets/css/standards.css'
-
+import MarkdownForReact from 'markdown-for-react';
+import StarRatingComponent from 'react-star-rating-component';
 
 
 class Productwholeinfo extends Component{
@@ -19,23 +20,23 @@ class Productwholeinfo extends Component{
 
     }
   }
- componentWillMount =()=>{
+ componentDidMount =()=>{
    axios(`http://localhost:3001/api/${this.props.productid}`).then((response)=>{
        console.log(response.data)
-       let page2 = response.data.fileurl + '&page=2'
-       let page3 = response.data.fileurl + '&page=3'
-       let page4= response.data.fileurl + '&page=4'
+        console.log(response.data.description.toString())
+        this.props.sendFileUrl(response.data.fileurl)
        this.setState({
          ...this.state,
          product: response.data,
-         page2: page2,
-         page3:page3,
-         page4:page4
+         description: response.data.description
        })
    })
  }
-
-
+componentWillReceiveProps=(props)=>{
+  this.setState({
+    fileurl: props.fileurl
+  })
+}
   render(){
 
 
@@ -49,16 +50,10 @@ class Productwholeinfo extends Component{
          <div className="preview col-md-6">
 
            <div className="preview-pic tab-content">
-             <div className="tab-pane active" id="pic-1"><embed className='pdfDisplay' src={this.state.product.fileurl} scroll="no" seamless="seamless" frameborder="0"></embed></div>
+             <div className="tab-pane active" id="pic-1"><embed className='pdfDisplay' src={this.props.fileurl} scroll="no" seamless="seamless" frameborder="0"></embed></div>
 
            </div>
 
-           <ul className="preview-thumbnail nav nav-tabs">
-             <li className="active"><a data-target="#pic-1" data-toggle="tab"><embed className="smallView" src={this.state.page2} /></a></li>
-             <li><a data-target="#pic-2" data-toggle="tab"><embed className="smallView" src={this.state.page3} ></embed></a></li>
-             <li><a data-target="#pic-3" data-toggle="tab"><embed className="smallView" src={this.state.page4} ></embed></a></li>
-
-           </ul>
 
          </div>
          <div className="details col-md-6">
@@ -74,19 +69,16 @@ class Productwholeinfo extends Component{
              <span className="review-no">{this.state.product.rating}</span>
            </div>
            <p className="product-description">{this.state.product.standard}</p>
-           <h4 className="price">Item price: <span>{this.state.product.price}</span></h4>
+           <h4 className="price">Item price: <span>${this.state.product.price}</span></h4>
            <h6 className="price">Grade Level: <span>{this.state.product.grade}</span></h6>
            <h6 className="price">Resource Type: <span>{this.state.product.resourcetype}</span></h6>
-
-           <h5 className="sizes">Subject:
-             <span className="size" data-toggle="tooltip" title="small">{this.state.product.subject}</span>
+           <h6 className="price">Subject: <span>{this.state.product.subject}</span></h6>
 
 
-           </h5>
 
            <div className="action">
              <button className="add-to-cart btn btn-default" type="button">add to cart</button>
-             <button className="like btn btn-default" type="button">Move to Wish List<span className="fa fa-heart"></span></button>
+             <button className="like btn btn-primary btn-block" type="button">Move to Wish List<span className="fa fa-heart"></span></button>
            </div>
          </div>
        </div>
@@ -102,7 +94,8 @@ class Productwholeinfo extends Component{
                 <div className="card-header bg-primary text-white text-uppercase"><i className="fa fa-align-justify"></i> Description</div>
                 <div className="card-body">
                     <p className="card-text">
-                      {this.state.product.description}
+                      <MarkdownForReact value={`${this.state.description}`} />
+
                     </p>
 
                 </div>
@@ -160,7 +153,8 @@ class Productwholeinfo extends Component{
 const mapStateToProps = (state) => {
   return {
     //ctr: state.counter // this.props.ctr
-    productid: state.productid
+    productid: state.productid,
+    fileurl:state.fileurl
   }
 }
 
@@ -168,7 +162,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     // this.props.onIncrementCounter
-
+  sendFileUrl : (fileurl)=> dispatch({type:'FILEURL',fileurl:fileurl})
 
   }
 }

@@ -1,6 +1,6 @@
 .preview {
     transform: scale(0.8);
-    margin-top: -100px;
+    margin-top: -50px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -42,7 +42,7 @@
             animation-duration: .3s; }
 .card {
   margin-top: 50px;
-  height: 600px;
+  height: 500px;
   background: #eee;
   padding: 3em;
   line-height: 1.5em; }
@@ -152,23 +152,30 @@
   border: none;
 
 }
-.smallView{
-  width:160px;
-  height:190px;
-  margin-left: -40px !important;
 
-}
+
+
 .preview-thumbnail{
   display: flex;
   justify-content: space-around;
 
 }
-.containerBox{
-
+.like{
+  width: fit-content !important;
+  margin-left: 1rem !important;
 }
 
 ::-webkit-scrollbar{
   width: 0px !important;
   height: 0px !important;
   background: transparent !important;
+}
+.action{
+  display: flex;
+
+}
+.details{
+  margin-top: -25px;
+  height: 450px;
+  padding-top: 20px;
 }

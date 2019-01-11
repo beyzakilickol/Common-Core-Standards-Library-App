@@ -61,6 +61,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         productid: action.productid
        }
+   }else if(action.type == "FILEURL"){
+
+       return {
+        ...state,
+        fileurl: action.fileurl
+       }
    }
  return state
 }
