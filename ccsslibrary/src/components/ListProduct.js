@@ -8,6 +8,7 @@ import request from "superagent";
 import classNames from 'classnames'
 import MyStatefulEditor from './MyStatefulEditor'
 import axios from 'axios'
+import {Link, NavLink} from 'react-router-dom'
 
 let config = {headers: {
   'Accept': 'application/json',
@@ -80,7 +81,8 @@ class ListProduct extends Component {
        keywords:'',
        title: '',
        resourcetype:'',
-       price: 0
+       price: 0,
+       buttonChange: <button onClick={this.sendItem} type="button" className="btn btn-primary btn-lg itemSubmitBtn">Publish Item</button>
     }
 
   }
@@ -213,11 +215,18 @@ fetch('http://localhost:3001/upload', {
             console.log(response.data)
             console.log(response.data.productid)
             this.props.sendProductIdForWholePage(response.data.productid)
-            this.props.history.push('/productwholeinfo')
+            this.props.sendFileUrl(this.state.fileURL)
+          }).catch((error)=>{
+            console.log(error)
           })
-          });
-      });
-    }).then((res)=>{ })
+          })
+      })
+    }).then((res)=>{
+       this.setState({
+         buttonChange: <a href='/productwholeinfo'><button type="button" className="btn btn-primary btn-lg itemSubmitBtn">View Item</button></a>
+       })
+      //this.props.history.push('/productwholeinfo')
+    })
 }
   render() {
   let standards = this.state.standards.map((standard)=>{
@@ -318,7 +327,7 @@ fetch('http://localhost:3001/upload', {
 
            <input onChange={this.getPrice} className="priceInput" type="text" placeholder="&nbsp;&nbsp;$ &nbsp;&nbsp;0" />
 
-          <button onClick={this.sendItem} type="button" className="btn btn-primary btn-lg itemSubmitBtn">Publish Item</button>
+          {this.state.buttonChange}
 
 
       </div>
@@ -349,8 +358,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     // this.props.onIncrementCounter
-sendProductIdForWholePage : (value) => dispatch({type: "PRODUCTID",productid: value})
-
+sendProductIdForWholePage : (value) => dispatch({type: "PRODUCTID",productid: value}),
+sendFileUrl : (fileurl)=> dispatch({type:'FILEURL',fileurl:fileurl})
   }
 }
 

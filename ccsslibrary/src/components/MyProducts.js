@@ -26,7 +26,7 @@ componentDidMount=()=>{
 sendproductid=(e)=>{
   console.log(e.target.value)
   this.props.sendProductIdForWholePage(e.target.value)
-  this.props.history.push('/productwholeinfo')
+  
 }
   render(){
      let items= this.state.items.map((each)=>{
@@ -35,7 +35,7 @@ sendproductid=(e)=>{
                <embed className='pdfDisplay2 photo-background' src={each.fileurl} scroll="no" seamless="seamless" frameborder="0"></embed>
                <div className="photo-details">
                    <h1 >{each.title}</h1><hr/>
-                   <p className="price capitalize"><span className="capitalize">Standard: </span>{each.standard}</p><hr/>
+                   <p className="price capitalize smallfont"><span className="capitalize standardspan">Standard: </span>{each.standard}</p><hr/>
                    <p className="price capitalize"><span className="capitalize">Grade: </span>{each.grade} / <span>Subject: </span> {each.subject}</p><hr/>
 
                    <p className="price"><span className="capitalize">Resource Type: </span>{each.resourcetype}</p>
@@ -47,7 +47,7 @@ sendproductid=(e)=>{
                    <li className="ratingbtnprice">Price</li><br/>
                    <li className="pricenumber">${each.price}</li>
                    <li><a className='buttonHover downloadbtn' href={each.fileurl} target="_blank" download>Print File</a></li>
-                       <li><button onClick={this.sendproductid} className='buttonHover detailsbtn' value={each.productid}>See Details</button></li>
+                       <a href='/productwholeinfo' className="detailsAnchor"><li><button onClick={this.sendproductid} className='buttonHover detailsbtn' value={each.productid}>See Details</button></li></a>
 
                    </ul>
                </div>
