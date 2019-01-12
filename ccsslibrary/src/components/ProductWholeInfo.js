@@ -90,7 +90,7 @@ componentWillReceiveProps=(props)=>{
 
 <div className="row descriptionCard">
  <div className="col-12">
-            <div className="card border-light mb-3">
+            <div className="descriptionfield card border-light mb-3">
                 <div className="card-header bg-primary text-white text-uppercase"><i className="fa fa-align-justify"></i> Description</div>
                 <div className="card-body">
                     <p className="card-text">
@@ -142,7 +142,7 @@ componentWillReceiveProps=(props)=>{
                 </div>
               </div>
 
-
+     <Footer/>
      </div>
     )
   }

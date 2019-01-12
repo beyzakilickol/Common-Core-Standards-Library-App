@@ -325,7 +325,7 @@ fetch('http://localhost:3001/upload', {
 
      </div>
       </div>
-
+     <Footer/>
 
       </div>
     )

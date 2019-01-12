@@ -18,6 +18,7 @@ import ListProduct from './components/ListProduct'
 import SellerRegistration from './components/SellerRegistration'
 import Aboutus from './components/Aboutus'
 import ProductWholeInfo from './components/ProductWholeInfo'
+import MyProducts from './components/MyProducts'
 //import Header from './components/Header'
 import {persistor, store} from './store/configureStore'
 
@@ -35,8 +36,9 @@ ReactDOM.render(<Provider store = {store}>
       <Route path="/standards" component={Standards} />
       <Route path="/listproduct" component={ListProduct} />
       <Route path="/sellerregistration" component={SellerRegistration} />
-        <Route path="/aboutus" component={Aboutus} />
-        <Route path="/productwholeinfo" component={ProductWholeInfo} />
+      <Route path="/aboutus" component={Aboutus} />
+      <Route path="/productwholeinfo" component={ProductWholeInfo} />
+      <Route path="/myproducts" component={MyProducts} />
 
     </Switch>
 

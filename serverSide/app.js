@@ -151,3 +151,9 @@ app.get('/api/:productid',function(req,res){
     res.json(response)
   })
 })
+app.post('/api/getmyproducts',function(req,res){
+  let userid= req.body.userid
+  db.any('select * from sellerproducts where userid=$1',[userid]).then((response)=>{
+    res.json(response)
+  })
+})

@@ -13,6 +13,7 @@ import ListProduct from './ListProduct'
 import Aboutus from './Aboutus'
 import SellerRegistration from './SellerRegistration'
 import ProductWholeInfo from './ProductWholeInfo'
+import MyProducts from './MyProducts'
 //------------css---------------
 import '../assets/bootstrap/css/bootstrap.min.css'
 import '../assets/fonts/font-awesome.min.css'

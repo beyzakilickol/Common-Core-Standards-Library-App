@@ -7,6 +7,7 @@
 }
 #dropdown{
 margin-top: 8px;
+
 }
 #navbarResponsive{
 margin-right: -46px !important;
@@ -17,6 +18,7 @@ margin-top: -25px !important;
 }
 .dropdown-item:hover {
    text-decoration: underline !important;
+
 }
 .cartImg{
  margin-left: 13.5rem !important;
@@ -25,4 +27,7 @@ margin-top: -25px !important;
 }
 .headercontainer{
   height: 50px !important;
+}
+.number{
+  margin-left: 70px !important;
 }
