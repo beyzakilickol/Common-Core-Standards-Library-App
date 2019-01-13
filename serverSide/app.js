@@ -189,10 +189,11 @@ app.post('/api/getcartitems',function(req,res){
 
   db.any('select * from buyerproducts b left join sellerproducts s on b.productid=s.productid left join users u on u.userid=s.userid where b.userid=$1 and status=$2',[userid,'await']).then((response)=>{
     let prices = response.map((each)=>{
-      return parseInt(each.price)
+      console.log(parseFloat(each.price))
+      return parseFloat(each.price)
     })
-    let total = prices.reduce((a,b)=>a+b,0)
-
+    let total = prices.reduce((a,b)=>a+b,0).toFixed(2)
+    console.log(total)
     res.json({response:response,total:total})
   })
 })
@@ -209,4 +210,69 @@ app.post('/api/deleteitem',function(req,res){
       res.json({success:true,cartcount:count2.cartcount})
     })
   })
+})
+app.post('/api/filterby',function(req,res){
+    let filtereditem = req.body.filtereditem
+    console.log(filtereditem)
+    db.any('select * from sellerproducts').then((response)=>{
+      if( filtereditem=='Free'){
+        let freeItems= response.filter((each)=>{
+          return each.price=='0'
+        })
+      res.json(freeItems)
+    } else if(filtereditem == 'Under $5'){
+        let lessThanFiveDollarItems= response.filter((each)=>{
+          return parseInt(each.price) < 4.99
+        })
+        console.log(lessThanFiveDollarItems)
+        res.json(lessThanFiveDollarItems)
+    } else if(filtereditem == '$5 - $10'){
+        let fiveToTenDollarItems= response.filter((each)=>{
+          return parseInt(each.price) > 4.99 && parseInt(each.price) < 9.99
+        })
+        res.json(fiveToTenDollarItems)
+    } else if(filtereditem == '$10 - $20'){
+        let tenToTwentyDollarItems= response.filter((each)=>{
+          return parseInt(each.price) > 9.99 && parseInt(each.price) < 19.99
+        })
+        res.json(tenToTwentyDollarItems)
+    } else if(filtereditem == '$20 and up'){
+        let moreThanTwentyDollarItems= response.filter((each)=>{
+          return parseInt(each.price) > 19.99
+        })
+        res.json(moreThanTwentyDollarItems)
+    } else if(filtereditem=='Assessment'){
+      let assessment= response.filter((each)=>{
+        return each.resourcetype=='Assessment'
+      })
+      res.json(assessment)
+    } else if(filtereditem=='Activity'){
+      let activity= response.filter((each)=>{
+        return each.resourcetype=='Activity'
+      })
+      res.json(activity)
+    } else if(filtereditem=='Worksheet'){
+      let worksheet= response.filter((each)=>{
+        return each.resourcetype=='Worksheet'
+      })
+      res.json(worksheet)
+    } else if(filtereditem=='Project'){
+      let project= response.filter((each)=>{
+        return each.resourcetype=='Project'
+      })
+      res.json(project)
+    } else if(filtereditem=='Poster'){
+      let poster= response.filter((each)=>{
+        return each.resourcetype=='Poster'
+      })
+      res.json(poster)
+    } else{
+    db.any('select u.nickname,u.userid,s.productid,s.rating,s.description,s.grade,s.resourcetype,s.subject,s.title,s.price,s.fileurl,s.standard from users u LEFT JOIN sellerproducts s on u.userid = s.userid where s.standard = $1',[filtereditem]).then((response)=>{
+          res.json(response)
+      }).catch((error)=>{
+          console.log(error)
+          res.json(error)
+    })
+  }
+})
 })

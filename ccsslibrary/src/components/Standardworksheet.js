@@ -10,6 +10,7 @@ import axios from 'axios'
 
 
 
+
 class Standardworksheet extends Component{
   constructor(props){
     super(props)
@@ -22,8 +23,19 @@ class Standardworksheet extends Component{
   }
 
   componentDidMount = ()=>{
-  axios.post('http://localhost:3001/api/filterbystandard',{
-     worksheetstandard: this.props.filteredstandard
+  axios.post('http://localhost:3001/api/filterby',{
+     filtereditem: this.props.filtereditem
+  }).then((response)=>{
+    console.log(response.data)
+    this.setState({
+      ...this.state,
+      standardsOfGrades : response.data
+    })
+  })
+}
+componentWillReceiveProps =(props)=>{
+  axios.post('http://localhost:3001/api/filterby',{
+     filtereditem: props.filtereditem
   }).then((response)=>{
     console.log(response.data)
     this.setState({
@@ -126,7 +138,7 @@ const mapStateToProps = (state) => {
   return {
     //ctr: state.counter // this.props.ctr
     // userid:state.userid
-    filteredstandard : state.filteredstandard,
+    filtereditem : state.filtereditem,
     userid:state.userid,
     cartcount:state.cartcount
   }
