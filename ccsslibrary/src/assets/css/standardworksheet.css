@@ -1,0 +1,147 @@
+.searchHeaderStandard{
+  margin-left: 10rem !important;
+  height: 5rem !important;
+
+}
+.standardHeaderList{
+  margin-left: 50rem !important;
+}
+
+.photoCard{
+  height: 250px !important;
+  width: 1000px;
+  margin-left: 17rem !important;
+  margin-bottom: 15rem !important;
+  box-shadow: none !important;
+  /* background-color: rgb(255,255,255); */
+  background-color: white !important;
+  transform: scale(0.9);
+}
+.pdfContainer{
+  height: auto !important;
+}
+.standardPageCard1{
+  margin-left: 15rem !important;
+  margin-top: -4rem !important;
+  border-width: medium !important;
+
+}
+.standardPageCard2{
+  margin-left: 8rem !important;
+  margin-top: -4rem !important;
+  border-width: medium !important;
+  border-style: ridge !important;
+  height: 371.5px !important;
+  transform: scale(0.85) !important;
+  font-size: 1vw !important;
+}
+.photo-background{
+  height: 240px;
+  width: 200px;
+  background-color: white;
+  min-height: 200px !important;
+
+}
+.photo-details h1{
+  margin-top: -22px;
+  color: black !important;
+}
+.photo-details p{
+width: 320px;
+  color: black !important;
+}
+.photo-tags{
+  width: 200px;
+    background-color: white;
+    margin-left: 20px !important;
+
+}
+.borderRight{
+  border-right: solid !important;
+  border-style: none !important;
+  margin-top: -37px !important;
+}
+.giveborder{
+  border-width: thin !important;
+  border-right:solid;
+  border-left:solid;
+  width: 150px !important;
+  height: 220px !important;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+  border-color: rgb(230, 230, 230);
+}
+
+.photoCard{
+      margin-left: 130px !important;
+}
+.pdfDisplay2{
+  height: auto !important;
+}
+.buttonHover:hover{
+  color:black !important;
+}
+.buttonHover{
+    text-transform: capitalize !important;
+    background-color: #18bc9c !important;
+    color:white !important;
+    margin-top: 20px !important;
+}
+.photo-tags li{
+  text-transform: capitalize !important;
+}
+.ratingbtn{
+  margin-left:25px !important;
+}
+
+.pricebox{
+  display: flex;
+}
+
+.myproductContainer{
+  display: flex;
+    justify-content: center;
+}
+.photo-card{
+  width:100% !important;
+  max-width:900px !important;
+}
+.photo-details{
+  width: inherit !important;
+}
+.detailsbutton{
+  width: 110px;
+  margin-right: 15px !important;
+  border-radius: 50px;
+  height: 1.5rem !important;
+  font-size: 14px !important;
+
+}
+.buttonDiv{
+  display:flex;
+  margin-top: -20px !important;
+}
+.wishbtn{
+  width: 160px !important;
+}
+.addCartbtn{
+  background-color: orange !important;
+  text-transform: capitalize !important;
+
+  color:white !important;
+  margin-top: 20px !important;
+}
+.addCartbtn:hover{
+  color:black !important;
+}
+.ratingList{
+  width: 6rem !important;
+}
+.pricediv{
+  margin-top: 30px !important;
+}
+.pricebold{
+  font-weight: bold !important;
+  color:black !important;
+  font-size: 20px !important;
+}

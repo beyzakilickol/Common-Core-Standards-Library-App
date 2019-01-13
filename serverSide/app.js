@@ -160,3 +160,53 @@ app.post('/api/getmyproducts',function(req,res){
     res.json(response)
   })
 })
+app.post('/api/filterbystandard',function(req,res){
+    let worksheetstandard = req.body.worksheetstandard
+    db.any('select u.nickname,u.userid,s.productid,s.rating,s.description,s.grade,s.resourcetype,s.subject,s.title,s.price,s.fileurl,s.standard from users u LEFT JOIN sellerproducts s on u.userid = s.userid where s.standard = $1',[worksheetstandard]).then((response)=>{
+          res.json(response)
+      }).catch((error)=>{
+          console.log(error)
+          res.json(error)
+    })
+})
+app.post('/api/sendtomycart',function(req,res){
+  let userid = req.body.userid
+  let productid = req.body.productid
+  let cartcount = req.body.cartcount
+  let count = parseInt(cartcount)+1
+  console.log(count)
+  let status='await'
+  db.none('insert into buyerproducts (userid,productid,status) values ($1,$2,$3)',[userid,productid,status]).then(()=>{
+    db.one('update users set cartcount=$1 where userid=$2 returning cartcount',[count,userid]).then((count)=>{
+      console.log(count)
+      res.json({success:true,cartcount:count})
+    })
+  })
+
+})
+app.post('/api/getcartitems',function(req,res){
+  let userid=req.body.userid
+  console.log(userid)
+  db.any('select * from buyerproducts b left join sellerproducts s on b.productid=s.productid left join users u on u.userid=s.userid where b.userid=$1 and status=$2',[userid,'await']).then((response)=>{
+    let prices = response.map((each)=>{
+      return parseInt(each.price)
+    })
+    let total = prices.reduce((a,b)=>a+b,0)
+
+    res.json({response:response,total:total})
+  })
+})
+app.post('/api/deleteitem',function(req,res){
+  let id=req.body.id
+  let cartcount= req.body.cartcount
+  let userid= req.body.userid
+  db.none('delete from buyerproducts where id=$1',[id]).then(()=>{
+    let count1 = parseInt(cartcount)-1
+    db.one('update users set cartcount=$1 where userid=$2 returning cartcount',[count1,userid]).then((count2)=>{
+
+
+      console.log(count2.cartcount)
+      res.json({success:true,cartcount:count2.cartcount})
+    })
+  })
+})

@@ -61,13 +61,26 @@ const reducer = (state = initialState, action) => {
         ...state,
         productid: action.productid
        }
-   }else if(action.type == "FILEURL"){
+   }else if(action.type == "STANDARDVALUE"){
+
+          return {
+            ...state,
+           filteredstandard: action.value
+          }
+    }else if(action.type == "FILEURL"){
 
        return {
         ...state,
         fileurl: action.fileurl
        }
-   }
+   }else if(action.type == "UPDATECARTCOUNT"){
+
+      return {
+       ...state,
+       cartcount: action.cartcount
+      }
+  }
+
  return state
 }
 
