@@ -35,6 +35,16 @@ deleteItem=(e)=>{
     userid: this.props.userid
   }).then((response)=>{
     console.log(response.data.cartcount)
+    axios.post('http://localhost:3001/api/getcartitems',{
+      userid:this.props.userid
+    }).then((response)=>{
+      console.log(response.data)
+      this.setState({
+        ...this.state,
+        items:response.data.response,
+        total: response.data.total
+      })
+    })
     this.props.updatecartcount(response.data.cartcount)
   })
 }
@@ -45,7 +55,9 @@ deleteItem=(e)=>{
               <div className="card mb-1 itemMainCard">
                   <div className="card-body cardMainDiv">
                       <div className="row">
+                        {this.state.result}
                       <div className="col-md-3 imageContainer">
+
                           <embed className="imgViewCard" src={each.fileurl}/>
                           <p className="card-text"><small className="text-muted">Created by {each.username} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br/>{each.nickname}</small></p>
                       </div>
@@ -62,7 +74,7 @@ deleteItem=(e)=>{
                           <div className="starBox">{each.rating}
                           </div>
 
-                        <a href="/viewcart"><button onClick={this.deleteItem} type="button" className="btn btn-warning rounded-1 mb-1 btnRemove" value={each.id}>&#128465;&nbsp;Remove</button></a>
+                        <button onClick={this.deleteItem} type="button" className="btn btn-warning rounded-1 mb-1 btnRemove" value={each.id}>&#128465;&nbsp;Remove</button>
                        <Link to="/"><button type="button" className="btn btn-success rounded-1 mb-1 btnBack">&#8617;Continue Searching</button></Link>
 
 

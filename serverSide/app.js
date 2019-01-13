@@ -186,7 +186,7 @@ app.post('/api/sendtomycart',function(req,res){
 })
 app.post('/api/getcartitems',function(req,res){
   let userid=req.body.userid
-  console.log(userid)
+
   db.any('select * from buyerproducts b left join sellerproducts s on b.productid=s.productid left join users u on u.userid=s.userid where b.userid=$1 and status=$2',[userid,'await']).then((response)=>{
     let prices = response.map((each)=>{
       return parseInt(each.price)
