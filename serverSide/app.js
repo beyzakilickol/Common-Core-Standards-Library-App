@@ -1,12 +1,23 @@
-
-const bodyParser = require('body-parser');
 const express = require('express')
-const app = express();
-const PORT = 3001
-const bcrypt = require('bcrypt');
-var cors = require('cors')
-const pgp= require('pg-promise')()
 const fileUpload = require('express-fileupload');
+const SERVER_CONFIGS = require('./constants/server');
+
+const configureServer = require('./server');
+const configureRoutes = require('./routes');
+
+const app = express();
+
+configureServer(app);
+configureRoutes(app);
+
+//var bodyParser = require('body-parser')
+const PORT = 3001
+
+const bcrypt = require('bcrypt');
+//var cors = require('cors')
+//app.use(cors())
+const pgp= require('pg-promise')()
+//const fileUpload = require('express-fileupload');
 const connectionString= {
     "host": "localhost",
     "port": 5432,
@@ -16,20 +27,19 @@ const connectionString= {
 
 const db = pgp(connectionString)
 const jwt = require('jsonwebtoken')
-app.use(cors())
-// parse application/json
-app.use(bodyParser.json())
 
+//app.use(bodyParser.json())
+//const dotEnv = require('dotenv').config()
 app.use('/pdfFiles',express.static('pdfFiles'))
 app.use(fileUpload());
-app.use(function(req, res, next) {
-  //
-  // res.header("Access-Control-Allow-Headers: Authorization")
-  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, Authorization,X-Requested-With, Content-Type, Accept");
-  next();
-});
+// app.use(function(req, res, next) {
+//   //
+//   // res.header("Access-Control-Allow-Headers: Authorization")
+//   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, Authorization,X-Requested-With, Content-Type, Accept");
+//   next();
+// });
 
 app.listen(PORT, function(){
   console.log('Server is running...')
@@ -275,4 +285,13 @@ app.post('/api/filterby',function(req,res){
     })
   }
 })
+})
+app.post('/api/updatestatus',function(req,res){
+  let userid = req.body.userid
+  console.log(userid)
+  console.log('working')
+  db.none('update buyerproducts set status=$1 where userid=$2',['sold',userid]).then(()=>{
+    console.log('updated')
+    res.json({success:true})
+  })
 })

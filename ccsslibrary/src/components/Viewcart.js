@@ -5,7 +5,7 @@ import {Link, NavLink} from 'react-router-dom'
 import '../assets/css/viewcart.css'
 import Footer from './Footer'
 import axios from 'axios'
-
+import Checkout from '../Checkout'
 
 
 class Viewcart extends Component{
@@ -128,7 +128,7 @@ deleteItem=(e)=>{
                                  <hr/>
                              </div>
 
-                             <button type="button" className="btn btn-primary btn-lg btn-block">Checkout</button>
+                             <Checkout amount = {this.state.total}/>
 
                      </div>
                  </div>
