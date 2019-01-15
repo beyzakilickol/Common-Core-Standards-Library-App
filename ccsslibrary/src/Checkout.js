@@ -5,6 +5,7 @@ import StripeCheckout from 'react-stripe-checkout';
 import STRIPE_PUBLISHABLE from './constants/stripe';
 import PAYMENT_SERVER_URL from './constants/server';
 import {store} from './store/configureStore'
+import history from './history'
 
 const CURRENCY = 'USD';
 
@@ -27,7 +28,26 @@ const onToken = (amount, description,props) => token =>
       currency: CURRENCY,
       amount: fromEuroToCent(amount)
     })
-    .then((response)=>{store.dispatch({type: "UPDATESTATUS",value: 'sold'})})
+    .then((response)=>{
+      store.dispatch({type: "UPDATESTATUS",value: 'sold'})
+      store.dispatch({type: "UPDATECARTCOUNT",cartcount:0})
+      let tree = store.getState()
+      axios.post('http://localhost:3001/api/updatecartitems',{
+        userid:tree.userid,
+        status:tree.status
+      }).then((response)=>{
+        console.log(response)
+        history.push('/mypurchases')
+      })
+      axios.post('http://localhost:3001/api/updatecartcount',{
+          cartcount: tree.cartcount,
+          userid: tree.userid,
+
+      }).then((response)=>{
+         console.log(response.data)
+      })
+
+    })
     .catch(errorPayment);
 
 const Checkout = ({ name, description, amount }) =>

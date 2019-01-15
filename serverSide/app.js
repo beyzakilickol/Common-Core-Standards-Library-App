@@ -181,11 +181,11 @@ app.post('/api/sendtomycart',function(req,res){
   let productid = req.body.productid
   let cartcount = req.body.cartcount
   let count = parseInt(cartcount)+1
-
+ console.log('Artirilmis count'+count)
   let status='await'
   db.none('insert into buyerproducts (userid,productid,status) values ($1,$2,$3)',[userid,productid,status]).then(()=>{
     db.one('update users set cartcount=$1 where userid=$2 returning cartcount',[count,userid]).then((count)=>{
-
+       console.log('db den gelen count'+count.cartcount)
       res.json({success:true,cartcount:count})
     })
   })

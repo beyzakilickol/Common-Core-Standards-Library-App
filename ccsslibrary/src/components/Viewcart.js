@@ -29,29 +29,35 @@ componentDidMount=()=>{
        total: response.data.total,
 
      })
+     if(response.data.total==0.00){
+       this.setState({
+         ...this.state,
+         message: 'Your cart is empty!'
+       })
+     }
    })
 }
 componentWillReceiveProps =(props)=>{
-  axios.post('http://localhost:3001/api/updatecartitems',{
-    userid:props.userid,
+  // axios.post('http://localhost:3001/api/updatecartitems',{
+  //   userid:props.userid,
     //status:props.status
-  }).then((response)=>{
-    console.log(response.data)
-    axios.post('http://localhost:3001/api/getcartitems',{
-      userid:props.userid
-    }).then((response)=>{
-      console.log(response.data)
-      this.setState({
-        ...this.state,
-        items:response.data.response,
-        total: response.data.total,
-       message: 'Your cart is empty!'
-      })
-      history.push('/mypurchases')
-       this.props.updateStatus()
-       this.props.updatecartcount(0)
-    })
-  })
+  // }).then((response)=>{
+  //   console.log(response.data)
+  //   axios.post('http://localhost:3001/api/getcartitems',{
+  //     userid:props.userid
+  //   }).then((response)=>{
+  //     console.log(response.data)
+  //     this.setState({
+  //       ...this.state,
+  //       items:response.data.response,
+  //       total: response.data.total,
+  //      message: 'Your cart is empty!'
+  //     })
+      // history.push('/mypurchases')
+      //  this.props.updateStatus()
+      //this.props.updatecartcount(0)
+  //   })
+  // })
 }
 deleteItem=(e)=>{
   axios.post('http://localhost:3001/api/deleteitem',{
@@ -68,8 +74,14 @@ deleteItem=(e)=>{
         ...this.state,
         items:response.data.response,
         total: response.data.total,
-        message: 'Your cart is empty!'
+
       })
+      if(response.data.total==0.00){
+        this.setState({
+          ...this.state,
+          message: 'Your cart is empty!'
+        })
+      }
     })
     this.props.updatecartcount(response.data.cartcount)
   })
