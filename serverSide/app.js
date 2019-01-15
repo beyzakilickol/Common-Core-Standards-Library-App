@@ -161,21 +161,19 @@ app.get('/api/:productid',function(req,res){
     res.json(response)
   })
 })
+app.post('/api/getallreviews',function(req,res){
+  let productid=req.body.productid
+  db.any('select * from buyerproducts b left join users u on u.userid=b.userid where productid=$1 and status=$2',[productid,'sold']).then((response)=>{
+    res.json(response)
+  })
+})
 app.post('/api/getmyproducts',function(req,res){
   let userid= req.body.userid
   db.any('select * from sellerproducts where userid=$1',[userid]).then((response)=>{
     res.json(response)
   })
 })
-// app.post('/api/filterbystandard',function(req,res){
-//     let worksheetstandard = req.body.worksheetstandard
-//     db.any('select u.nickname,u.userid,s.productid,s.rating,s.description,s.grade,s.resourcetype,s.subject,s.title,s.price,s.fileurl,s.standard from users u LEFT JOIN sellerproducts s on u.userid = s.userid where s.standard = $1',[worksheetstandard]).then((response)=>{
-//           res.json(response)
-//       }).catch((error)=>{
-//           console.log(error)
-//           res.json(error)
-//     })
-// })
+
 app.post('/api/sendtomycart',function(req,res){
   let userid = req.body.userid
   let productid = req.body.productid

@@ -185,7 +185,7 @@ const mapStateToProps = (state) => {
     filtereditem : state.filtereditem,
     userid:state.userid,
     cartcount:state.cartcount,
-    searcValue:state.searchValue
+    searchValue:state.searchValue
   }
 }
 

@@ -7,6 +7,7 @@ import '../assets/css/footer.css'
 import StarRatingComponent from 'react-star-rating-component';
 import {Link, NavLink} from 'react-router-dom'
 import Footer from './Footer'
+import history from '../history'
 
 class LeaveReview extends Component{
   constructor(props){
@@ -27,6 +28,7 @@ class LeaveReview extends Component{
        userid: this.props.userid
      }).then((response)=>{
          console.log(response)
+         history.push('/mypurchases')
      })
   }
   getReview=(e)=>{

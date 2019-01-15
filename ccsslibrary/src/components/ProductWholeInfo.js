@@ -17,7 +17,7 @@ class Productwholeinfo extends Component{
     super(props)
     this.state={
       product:{},
-
+      productwithreviews: []
     }
   }
  componentDidMount =()=>{
@@ -35,13 +35,45 @@ class Productwholeinfo extends Component{
          product: response.data,
          description: response.data.description
        })
+       axios.post('http://localhost:3001/api/getallreviews',{
+         productid : response.data.productid
+       }).then((response)=>{
+         console.log(response.data)
+         this.setState({
+           ...this.state,
+           productwithreviews: response.data,
+
+         })
+       })
    }).catch((error)=>{
      console.log(error)
    })
  }
-
+ sendtomycart=(e)=>{
+   console.log(e.target.value)
+   axios.post('http://localhost:3001/api/sendtomycart',{
+      cartcount: this.props.cartcount,
+      userid: this.props.userid,
+      productid: e.target.value
+   }).then((response)=>{
+     console.log(response.data.cartcount.cartcount)
+     this.props.updatecartcount(response.data.cartcount.cartcount)
+   })
+ }
   render(){
+   let reviewsanduser = this.state.productwithreviews.map((each)=>{
+     return         <div className="review">
+                       <span className="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 
+                       by {each.username}
+                       <p className="blockquote">
+                           <p className="mb-0">{each.review}</p>
+                       </p>
+                       <hr/>
+                   </div>
+
+
+   })
 
     return (
       <div>
@@ -80,7 +112,7 @@ class Productwholeinfo extends Component{
 
 
            <div className="action buttonDiv">
-             <button className="add-to-cart btn btn-default" type="button">add to cart</button>
+             <button onClick={this.sendtomycart} value={this.state.product.productid} className="add-to-cart btn btn-default" type="button">add to cart</button>
              <button className="like btn btn-primary btn-block" type="button">Move to Wish List<span className="fa fa-heart"></span></button>
            </div>
          </div>
@@ -104,45 +136,14 @@ class Productwholeinfo extends Component{
                 </div>
             </div>
         </div>
-
-
         <div className="col-12 reviewCard itemDescriptionDiv" id="reviews">
-            <div className="card border-light mb-3">
-                <div className="card-header bg-primary text-white text-uppercase"><i className="fa fa-comment"></i> Reviews</div>
-                <div className="card-body">
-                    <div className="review">
-                        <span className="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                        <meta itemprop="datePublished" content="01-01-2016"/>January 01, 2018
-
-                        <span className="fa fa-star"></span>
-                        <span className="fa fa-star"></span>
-                        <span className="fa fa-star"></span>
-                        <span className="fa fa-star"></span>
-                        <span className="fa fa-star"></span>
-                        by Paul Smith
-                        <p className="blockquote">
-                            <p className="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                        </p>
-                        <hr/>
-                    </div>
-                    <div className="review">
-                        <span className="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                        <meta itemprop="datePublished" content="01-01-2016"/>January 01, 2018
-
-                        <span className="fa fa-star" aria-hidden="true"></span>
-                        <span className="fa fa-star" aria-hidden="true"></span>
-                        <span className="fa fa-star" aria-hidden="true"></span>
-                        <span className="fa fa-star" aria-hidden="true"></span>
-                        <span className="fa fa-star" aria-hidden="true"></span>
-                        by Paul Smith
-                        <p className="blockquote">
-                            <p className="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                        </p>
-                        <hr/>
-                    </div>
-                    </div>
-                  </div>
-                </div>
+              <div className="card border-light mb-3">
+                  <div className="card-header bg-primary text-white text-uppercase"><i className="fa fa-comment"></i> Reviews</div>
+                  <div className="card-body">
+       {reviewsanduser}
+       </div>
+     </div>
+   </div>
               </div>
 
      <Footer/>
@@ -157,7 +158,11 @@ const mapStateToProps = (state) => {
   return {
     //ctr: state.counter // this.props.ctr
     productid: state.productid,
-    fileurl:state.fileurl
+    fileurl:state.fileurl,
+    filtereditem : state.filtereditem,
+    userid:state.userid,
+    cartcount:state.cartcount,
+    searcValue:state.searchValue
   }
 }
 
@@ -166,7 +171,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     // this.props.onIncrementCounter
   // sendFileUrl : (fileurl)=> dispatch({type:'FILEURL',fileurl:fileurl})
-
+  updatecartcount : (cartcount) => dispatch({type: "UPDATECARTCOUNT",cartcount:cartcount}),
   }
 }
 

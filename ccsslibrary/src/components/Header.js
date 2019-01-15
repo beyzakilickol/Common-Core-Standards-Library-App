@@ -19,13 +19,7 @@ class Header extends Component{
 
     }
   componentWillReceiveProps=(props)=>{
-    // axios.post('http://localhost:3001/api/updatecartcount',{
-    //    cartcount: props.cartcount,
-    //    userid: this.props.userid,
-    //
-    // }).then((response)=>{
-    //    console.log(response.data)
-    // })
+
   }
   render(){
           let withUser = ''
