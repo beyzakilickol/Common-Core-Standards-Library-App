@@ -310,3 +310,23 @@ app.post('/api/getmypurchases',function(req,res){
     res.json(response)
   })
 })
+app.post('/api/sendFeedback',function(req,res){
+  console.log('hey')
+  let productreviewid = req.body.productreviewid
+  let rating=req.body.rating
+  let textvalue = req.body.textvalue
+  let userid = req.body.userid
+  let finalrating;
+  db.one('select * from sellerproducts where productid=$1',[productreviewid]).then((response)=>{
+    if(response.rating == 'No rating yet'){
+      finalrating = rating
+    }else{
+      finalrating = (parseFloat(response.rating) + parseFloat(rating))/2
+    }
+        db.none('update sellerproducts set rating=$1 where productid=$2',[finalrating.toFixed(1),productreviewid])
+        db.none('update buyerproducts set review=$1,rating=$2 where userid=$3 and productid=$4',[textvalue,finalrating,userid,productreviewid]).then(()=>{
+          res.json({success:true})
+        })
+  })
+
+})

@@ -7,7 +7,7 @@ import '../assets/css/standardworksheet.css'
 import Footer from './Footer'
 import Filter from './Filter'
 import axios from 'axios'
-
+import StarRatingComponent from 'react-star-rating-component';
 
 
 
@@ -84,7 +84,14 @@ sendtomycart=(e)=>{
                </div>
                <div className="photo-tags ratingDiv" >
                    <ul>
-                   <li className="price ratingList"><span className="capitalize ratingSpan">Rating: </span><br />{each.rating}</li>
+
+                   <li className="price ratingList"><span className="capitalize ratingSpan">Rating: </span><br />{each.rating}</li> <li><StarRatingComponent
+           name="rate2"
+           editing={false}
+
+           starCount={5}
+           value={Math.round(each.rating)}
+         /></li>
                    <li className="price priceList pricediv"><span className="capitalize">Price <br/> </span><span className="pricebold">${each.price}</span></li>
                    </ul>
                </div>

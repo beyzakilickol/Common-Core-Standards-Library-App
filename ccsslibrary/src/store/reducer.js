@@ -85,7 +85,13 @@ const reducer = (state = initialState, action) => {
       ...state,
     status: action.value
      }
- }
+ }else if(action.type == "PRODUCTREVIEWID"){
+
+    return {
+     ...state,
+   productreviewid: action.productid
+    }
+}
 
  return state
 }

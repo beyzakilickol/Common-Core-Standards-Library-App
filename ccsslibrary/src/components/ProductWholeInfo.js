@@ -62,13 +62,13 @@ class Productwholeinfo extends Component{
          <div className="details col-md-6">
            <h3 className="product-title">{this.state.product.title}</h3>
            <div className="rating">
-             <div className="stars">
-               <span className="fa fa-star checked"></span>
-               <span className="fa fa-star checked"></span>
-               <span className="fa fa-star checked"></span>
-               <span className="fa fa-star"></span>
-               <span className="fa fa-star"></span>
-             </div>
+           <StarRatingComponent
+  name="rate2"
+  editing={false}
+
+  starCount={5}
+  value={Math.round(this.state.product.rating)}
+/>
              <span className="review-no">{this.state.product.rating}</span>
            </div>
            <p className="product-description">{this.state.product.standard}</p>

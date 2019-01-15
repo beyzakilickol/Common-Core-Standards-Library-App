@@ -23,7 +23,7 @@ import Viewcart from './components/Viewcart'
 import {persistor, store} from './store/configureStore'
 import Standardworksheet from './components/Standardworksheet'
 import MyPurchases from './components/MyPurchases'
-
+import LeaveReview from './components/LeaveReview'
 
 ReactDOM.render(<Provider store = {store}>
   <PersistGate loading={null} persistor={persistor}>
@@ -44,7 +44,7 @@ ReactDOM.render(<Provider store = {store}>
       <Route path="/mypurchases" component={MyPurchases} />
       <Route path="/viewcart" component={Viewcart} />
       <Route path="/standardworksheet" component={Standardworksheet} />
-
+      <Route path="/leavereview" component={LeaveReview} />
     </Switch>
 
   </BaseLayout>

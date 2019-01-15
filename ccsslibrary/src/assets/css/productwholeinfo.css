@@ -182,3 +182,6 @@
 .descriptionfield{
   height:auto !important;
 }
+.rating{
+  display:flex;
+}
