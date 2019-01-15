@@ -91,7 +91,12 @@ const reducer = (state = initialState, action) => {
      ...state,
    productreviewid: action.productid
     }
-}
+}else if(action.type == "SEARCHVALUE"){
+   return {  ...state,
+   searchValue : action.searchValue
+
+   }
+ }
 
  return state
 }

@@ -1,4 +1,27 @@
 .standard-container{
-margin-left: 300px !important;
-margin-top: 10px;
+margin-top: 10px !important;
+margin-left: 275px !important;
+
+}
+.standardListBtn{
+  /* list-style: none !important; */
+}
+
+.standardInputBox {
+  height: auto !important;
+  background-image:none !important;
+  background-size: 0 !important;
+  border-width: inherit !important;
+  padding-right: 2rem !important;
+  display: flex !important;
+  flex: 1 !important;
+  width: 100% !important;
+  white-space: normal !important;
+  text-align:left !important;
+
+}
+.listBtn{
+  height: auto !important;
+  background-color: white !important;
+  margin-left: 2rem !important;
 }

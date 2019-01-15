@@ -18,6 +18,7 @@ import MyPurchases from './MyPurchases'
 import Viewcart from './Viewcart'
 import Standardworksheet from './Standardworksheet'
 import LeaveReview from './LeaveReview'
+import Search from './Search'
 //------------css---------------
 import '../assets/bootstrap/css/bootstrap.min.css'
 import '../assets/fonts/font-awesome.min.css'

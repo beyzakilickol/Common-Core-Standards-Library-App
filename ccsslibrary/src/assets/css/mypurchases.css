@@ -73,3 +73,6 @@ color: white !important;
 .ratingadjust{
   text-align: center;
 }
+.photo-tags li{
+  list-style-type: none;
+}

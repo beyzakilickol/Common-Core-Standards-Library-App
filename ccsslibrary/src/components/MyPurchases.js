@@ -51,19 +51,18 @@ sendReviewProductId=(e)=>{
                    <p className="price"><span className="capitalize">Resource Type: </span>{each.resourcetype}</p>
 
                </div>
-               <div className="photo-tags" >
+               <div className="photo-tags tags" >
                    <ul>
                    <li className="ratingbtn">Rating</li>
                    <li className="ratingnumber">
                    <h6 className="ratingadjust">{each.rating}</h6>
-                   <StarRatingComponent
+                  <StarRatingComponent
           name="rate2"
           editing={false}
 
           starCount={5}
           value={Math.round(each.rating)}
-        />
-                   </li> <hr/>
+        /></li><hr/>
                    <div className="ratingDiv">
                    <li className="ratingbtnprice">Price</li><br/>
                    <li className="pricenumber">${each.price}</li>

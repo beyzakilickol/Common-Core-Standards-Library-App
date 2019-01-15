@@ -152,9 +152,19 @@
   border: none;
 
 }
+.descriptionMainBox{
+  /* margin-top: 25px; */
+}
+.pdfDocCard{
+  height:auto !important;
+}
+.itemInfoCard{
+  height: auto !important;
 
-
-
+}
+.btnAddCart{
+  margin-bottom: 2rem !important;
+}
 .preview-thumbnail{
   display: flex;
   justify-content: space-around;
@@ -179,8 +189,15 @@
   height: 450px;
   padding-top: 20px;
 }
-.descriptionfield{
+.descriptionField{
+   height: auto !important;
+}
+.itemDescriptionDiv{
   height:auto !important;
+}
+.reviewCardBody{
+  height:auto !important;
+  padding-top: 0 !important;
 }
 .rating{
   display:flex;

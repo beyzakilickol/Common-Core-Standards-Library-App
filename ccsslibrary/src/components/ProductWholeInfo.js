@@ -75,11 +75,11 @@ class Productwholeinfo extends Component{
            <h4 className="price">Item price: <span>${this.state.product.price}</span></h4>
            <h6 className="price">Grade Level: <span>{this.state.product.grade}</span></h6>
            <h6 className="price">Resource Type: <span>{this.state.product.resourcetype}</span></h6>
-           <h6 className="price">Subject: <span>{this.state.product.subject}</span></h6>
+           <h6 className="price btnAddCart">Subject: <span>{this.state.product.subject}</span></h6>
 
 
 
-           <div className="action">
+           <div className="action buttonDiv">
              <button className="add-to-cart btn btn-default" type="button">add to cart</button>
              <button className="like btn btn-primary btn-block" type="button">Move to Wish List<span className="fa fa-heart"></span></button>
            </div>
@@ -92,7 +92,7 @@ class Productwholeinfo extends Component{
 
 
 <div className="row descriptionCard">
- <div className="col-12">
+ <div className="col-12 descriptionMainBox">
             <div className="descriptionfield card border-light mb-3">
                 <div className="card-header bg-primary text-white text-uppercase"><i className="fa fa-align-justify"></i> Description</div>
                 <div className="card-body">
@@ -106,7 +106,7 @@ class Productwholeinfo extends Component{
         </div>
 
 
-        <div className="col-12 reviewCard" id="reviews">
+        <div className="col-12 reviewCard itemDescriptionDiv" id="reviews">
             <div className="card border-light mb-3">
                 <div className="card-header bg-primary text-white text-uppercase"><i className="fa fa-comment"></i> Reviews</div>
                 <div className="card-body">
