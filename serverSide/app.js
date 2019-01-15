@@ -52,7 +52,7 @@ app.post('/api/register',function(req,res){
   let userType = 'regular'
   let cartcount = 0
   db.one('SELECT userid,username,email,password,usertype FROM users WHERE email = $1',[email]).then((user)=>{
- console.log(user)
+
  res.json('This email is already taken. Please try with different credential!')
 
  }).catch((error)=>{
@@ -74,10 +74,9 @@ app.post('/api/register',function(req,res){
 app.post('/api/login',function(req,res){
   let email = req.body.email
   let password = req.body.password
-  console.log(email)
-  console.log(password)
+
   db.one('SELECT userid,email,password,username,usertype,cartcount FROM users WHERE email = $1',[email]).then((response)=>{
-    console.log(response)
+
     bcrypt.compare(password,response.password,function(error,result){
       if(result) {
         const token = jwt.sign({ id : response.userid },"somesecretkey")
@@ -118,7 +117,7 @@ app.post('/api/listproduct',function(req,res){
   let price=req.body.price
   let userid = req.body.userid
   let fileurl = req.body.fileurl
-  console.log(fileurl)
+
 db.one('insert into sellerproducts (rating,description,grade,subject,standard,keywords,title,resourcetype,price,userid,fileurl) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) returning productid',[rating,description,grade,subject,standard,keywords,title,resourcetype,price,userid,fileurl]).then((response)=>{
   // db.one('select productid from sellerproducts where fileurl=$1',[fileurl]).then((response)=>{
     res.json({success:true,productid:response.productid})
@@ -145,10 +144,8 @@ function s4() {
 //-------------to send pdf file to 'pdfFiles folder' inside server side------------------------------
 app.post('/upload', (req, res, next) => {
 let uniqueid = guid()
-
   let pdfFile = req.files.file;
 
-  console.log(pdfFile)
   pdfFile.mv(`${__dirname}/pdfFiles/${uniqueid}.pdf`, function(err) {
       if (err) {
         return res.status(500).send(err);
@@ -184,11 +181,11 @@ app.post('/api/sendtomycart',function(req,res){
   let productid = req.body.productid
   let cartcount = req.body.cartcount
   let count = parseInt(cartcount)+1
-  console.log(count)
+
   let status='await'
   db.none('insert into buyerproducts (userid,productid,status) values ($1,$2,$3)',[userid,productid,status]).then(()=>{
     db.one('update users set cartcount=$1 where userid=$2 returning cartcount',[count,userid]).then((count)=>{
-      console.log(count)
+
       res.json({success:true,cartcount:count})
     })
   })
@@ -199,12 +196,19 @@ app.post('/api/getcartitems',function(req,res){
 
   db.any('select * from buyerproducts b left join sellerproducts s on b.productid=s.productid left join users u on u.userid=s.userid where b.userid=$1 and status=$2',[userid,'await']).then((response)=>{
     let prices = response.map((each)=>{
-      console.log(parseFloat(each.price))
+
       return parseFloat(each.price)
     })
     let total = prices.reduce((a,b)=>a+b,0).toFixed(2)
-    console.log(total)
+
     res.json({response:response,total:total})
+  })
+})
+app.post('/api/updatecartitems',function(req,res){
+  let userid = req.body.userid
+  let status = 'sold'
+  db.none('update buyerproducts set status = $1 where userid=$2',[status,userid]).then(()=>{
+    res.json({success:true})
   })
 })
 app.post('/api/deleteitem',function(req,res){
@@ -215,15 +219,13 @@ app.post('/api/deleteitem',function(req,res){
     let count1 = parseInt(cartcount)-1
     db.one('update users set cartcount=$1 where userid=$2 returning cartcount',[count1,userid]).then((count2)=>{
 
-
-      console.log(count2.cartcount)
       res.json({success:true,cartcount:count2.cartcount})
     })
   })
 })
 app.post('/api/filterby',function(req,res){
     let filtereditem = req.body.filtereditem
-    console.log(filtereditem)
+
     db.any('select * from sellerproducts').then((response)=>{
       if( filtereditem=='Free'){
         let freeItems= response.filter((each)=>{
@@ -234,7 +236,7 @@ app.post('/api/filterby',function(req,res){
         let lessThanFiveDollarItems= response.filter((each)=>{
           return parseInt(each.price) < 4.99
         })
-        console.log(lessThanFiveDollarItems)
+
         res.json(lessThanFiveDollarItems)
     } else if(filtereditem == '$5 - $10'){
         let fiveToTenDollarItems= response.filter((each)=>{
@@ -288,10 +290,23 @@ app.post('/api/filterby',function(req,res){
 })
 app.post('/api/updatestatus',function(req,res){
   let userid = req.body.userid
-  console.log(userid)
-  console.log('working')
   db.none('update buyerproducts set status=$1 where userid=$2',['sold',userid]).then(()=>{
-    console.log('updated')
+
     res.json({success:true})
+  })
+})
+app.post('/api/updatecartcount',function(req,res){
+  let userid = req.body.userid
+  let cartcount = req.body.cartcount
+  console.log('userid: '+ userid)
+  console.log('cartcount :' +cartcount)
+  db.none('update users set cartcount=$1 where userid=$2',[0,userid]).then(()=>{
+    res.json({success:true})
+  })
+})
+app.post('/api/getmypurchases',function(req,res){
+  let userid = req.body.userid
+  db.any('select * from buyerproducts b left join sellerproducts s on s.productid=b.productid where status=$1 and b.userid=$2',['sold',userid]).then((response)=>{
+    res.json(response)
   })
 })

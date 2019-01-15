@@ -14,6 +14,7 @@ import Aboutus from './Aboutus'
 import SellerRegistration from './SellerRegistration'
 import ProductWholeInfo from './ProductWholeInfo'
 import MyProducts from './MyProducts'
+import MyPurchases from './MyPurchases'
 import Viewcart from './Viewcart'
 import Standardworksheet from './Standardworksheet'
 //------------css---------------

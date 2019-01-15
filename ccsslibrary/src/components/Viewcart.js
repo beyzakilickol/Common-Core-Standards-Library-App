@@ -6,6 +6,7 @@ import '../assets/css/viewcart.css'
 import Footer from './Footer'
 import axios from 'axios'
 import Checkout from '../Checkout'
+import history from '../history'
 
 
 class Viewcart extends Component{
@@ -13,7 +14,8 @@ class Viewcart extends Component{
     super(props)
     this.state={
      items:[],
-     total: 0
+     total: 0,
+     message: ''
     }
   }
 componentDidMount=()=>{
@@ -24,9 +26,32 @@ componentDidMount=()=>{
      this.setState({
        ...this.state,
        items:response.data.response,
-       total: response.data.total
+       total: response.data.total,
+
      })
    })
+}
+componentWillReceiveProps =(props)=>{
+  axios.post('http://localhost:3001/api/updatecartitems',{
+    userid:props.userid,
+    //status:props.status
+  }).then((response)=>{
+    console.log(response.data)
+    axios.post('http://localhost:3001/api/getcartitems',{
+      userid:props.userid
+    }).then((response)=>{
+      console.log(response.data)
+      this.setState({
+        ...this.state,
+        items:response.data.response,
+        total: response.data.total,
+       message: 'Your cart is empty!'
+      })
+      history.push('/mypurchases')
+       this.props.updateStatus()
+       this.props.updatecartcount(0)
+    })
+  })
 }
 deleteItem=(e)=>{
   axios.post('http://localhost:3001/api/deleteitem',{
@@ -42,7 +67,8 @@ deleteItem=(e)=>{
       this.setState({
         ...this.state,
         items:response.data.response,
-        total: response.data.total
+        total: response.data.total,
+        message: 'Your cart is empty!'
       })
     })
     this.props.updatecartcount(response.data.cartcount)
@@ -93,7 +119,7 @@ deleteItem=(e)=>{
 <div className="row">
   <div className="col-md-9">
       <div className="row">
-
+      <h4 className='paymentMessage'>{this.state.message}</h4>
       {cartItems}
                       </div>
                   </div>
@@ -162,7 +188,8 @@ const mapStateToProps = (state) => {
   return {
     //ctr: state.counter // this.props.ctr
     userid:state.userid,
-    cartcount: state.cartcount
+    cartcount: state.cartcount,
+    status: state.status
   }
 }
 
@@ -171,7 +198,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     // this.props.onIncrementCounter
     // updateUserType : () => dispatch({type: "UPDATEUSERTYPE"})
-    updatecartcount : (cartcount) => dispatch({type: "UPDATECARTCOUNT",cartcount:cartcount})
+    updatecartcount : (cartcount) => dispatch({type: "UPDATECARTCOUNT",cartcount:cartcount}),
+    updateStatus : ()=>dispatch({type: "UPDATESTATUS",value:''})
   }
 }
 

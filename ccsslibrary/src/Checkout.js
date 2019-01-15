@@ -1,8 +1,10 @@
 import React from 'react'
 import axios from 'axios';
+import { connect } from 'react-redux'
 import StripeCheckout from 'react-stripe-checkout';
 import STRIPE_PUBLISHABLE from './constants/stripe';
 import PAYMENT_SERVER_URL from './constants/server';
+import {store} from './store/configureStore'
 
 const CURRENCY = 'USD';
 
@@ -17,7 +19,7 @@ const errorPayment = data => {
   alert('Payment Error');
 };
 
-const onToken = (amount, description) => token =>
+const onToken = (amount, description,props) => token =>
   axios.post(PAYMENT_SERVER_URL,
     {
       description,
@@ -25,7 +27,7 @@ const onToken = (amount, description) => token =>
       currency: CURRENCY,
       amount: fromEuroToCent(amount)
     })
-    .then(successPayment)
+    .then((response)=>{store.dispatch({type: "UPDATESTATUS",value: 'sold'})})
     .catch(errorPayment);
 
 const Checkout = ({ name, description, amount }) =>
@@ -39,4 +41,4 @@ const Checkout = ({ name, description, amount }) =>
     stripeKey={STRIPE_PUBLISHABLE}
   />
 
-export default Checkout;
+export default Checkout

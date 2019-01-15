@@ -22,6 +22,7 @@ import MyProducts from './components/MyProducts'
 import Viewcart from './components/Viewcart'
 import {persistor, store} from './store/configureStore'
 import Standardworksheet from './components/Standardworksheet'
+import MyPurchases from './components/MyPurchases'
 
 
 ReactDOM.render(<Provider store = {store}>
@@ -40,6 +41,7 @@ ReactDOM.render(<Provider store = {store}>
       <Route path="/aboutus" component={Aboutus} />
       <Route path="/productwholeinfo" component={ProductWholeInfo} />
       <Route path="/myproducts" component={MyProducts} />
+      <Route path="/mypurchases" component={MyPurchases} />
       <Route path="/viewcart" component={Viewcart} />
       <Route path="/standardworksheet" component={Standardworksheet} />
 
