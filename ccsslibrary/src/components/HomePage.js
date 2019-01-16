@@ -7,6 +7,7 @@ import Filter from './Filter'
 import deskimg from '../assets/img/desk.jpg'
 import {Link, NavLink} from 'react-router-dom'
 import history from '../history'
+import axios from 'axios'
 
 class HomePage extends Component {
   constructor(props){
@@ -15,7 +16,13 @@ class HomePage extends Component {
       searchBoxValue : ""
     }
   }
-
+componentDidMount=()=>{
+  axios('http://localhost:3001/api/getpopularitems').then((response)=>{
+         console.log(response.data)
+  }).catch((error)=>{
+    console.log(error)
+  })
+}
   getSearchValue = (e) =>{
          this.setState({
            ...this.state,

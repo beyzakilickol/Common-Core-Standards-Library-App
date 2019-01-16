@@ -44,6 +44,9 @@ app.use(fileUpload());
 app.listen(PORT, function(){
   console.log('Server is running...')
 })
+
+
+
 //---------------------------------------------------------------
 app.post('/api/register',function(req,res){
   let username = req.body.username
@@ -71,6 +74,9 @@ app.post('/api/register',function(req,res){
    }
 })
 })
+
+
+
 app.post('/api/login',function(req,res){
   let email = req.body.email
   let password = req.body.password
@@ -93,6 +99,8 @@ if(error.received == 0){
 })
 
 })
+
+
 app.post('/api/sellerregister',function(req,res){
  let nickname = req.body.nickname
  let paypalEmail = req.body.paypalEmail
@@ -105,6 +113,8 @@ app.post('/api/sellerregister',function(req,res){
  })
 
 })
+
+
 app.post('/api/listproduct',function(req,res){
   let rating = 'No rating yet'
   let description = req.body.description
@@ -130,6 +140,8 @@ db.one('insert into sellerproducts (rating,description,grade,subject,standard,ke
 
 
 })
+
+//
 //--------to generate random unique id for pdf files--------------
 function guid() {
   return "ss-s-s-s-sss".replace(/s/g, s4);
@@ -155,7 +167,9 @@ let uniqueid = guid()
     });
 
 })
-app.get('/api/:productid',function(req,res){
+
+
+app.get('/api/products/:productid',function(req,res){
   let productid = req.params.productid
   db.one('select * from sellerproducts where productid=$1',[productid]).then((response)=>{
     res.json(response)
@@ -344,5 +358,14 @@ app.post('/api/sendFeedback',function(req,res){
           res.json({success:true})
         })
   })
+})
 
+
+app.get('/api/getpopularitems',function(req,res){
+  db.any("select productid from buyerproducts where status=$1",['sold']).then((response)=>{
+    console.log(response)
+    res.json(response)
+  }).catch((error)=>{
+    res.json(error)
+  })
 })

@@ -26,7 +26,7 @@ class Productwholeinfo extends Component{
      ...this.state,
      fileurl:this.props.fileurl
    })
-   axios(`http://localhost:3001/api/${this.props.productid}`).then((response)=>{
+   axios(`http://localhost:3001/api/products/${this.props.productid}`).then((response)=>{
        console.log(response.data)
         console.log(response.data.description.toString())
         //this.props.sendFileUrl(response.data.fileurl)
@@ -162,7 +162,7 @@ const mapStateToProps = (state) => {
     filtereditem : state.filtereditem,
     userid:state.userid,
     cartcount:state.cartcount,
-    searcValue:state.searchValue
+    searchValue:state.searchValue
   }
 }
 
