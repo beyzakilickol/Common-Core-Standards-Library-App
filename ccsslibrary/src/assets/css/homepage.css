@@ -93,7 +93,24 @@
 .cardHr{
   color: #808080 !important;
   width : 90%;
-  border-width: 0.6px;
+
   border-color:inherit;
   opacity: 0.6 !important;
+}
+.combineRating{
+display:flex !important;
+/* margin-left: 40px !important; */
+justify-content: center;
+}
+.arrowDiv{
+  border-top: solid !important;
+  border-width: thin;
+  padding-top: 5px;
+  background:none;
+  border:none;
+  width: 100%;
+  color: #808080 !important;
+}
+.marginTop{
+margin-top: -50px !important;
 }

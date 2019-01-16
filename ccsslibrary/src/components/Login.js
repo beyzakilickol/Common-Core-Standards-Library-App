@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import '../assets/css/login.css'
-import Footer from './Footer'
+import LoginFooter from './LoginFooter'
 import {Link, NavLink} from 'react-router-dom'
 
 
@@ -95,7 +95,7 @@ axios.post('http://localhost:3001/api/login',{
 
         </div>
       </div>
-      <Footer style={{position: 'absolute',
+      <LoginFooter style={{position: 'absolute',
      left: '0',
      bottom: '0',
      height: '205px',

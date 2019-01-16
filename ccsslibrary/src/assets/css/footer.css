@@ -9,7 +9,7 @@ footer{
   display: block;
   z-index:3 !important;
   position:relative;
-
+  margin-top: 20vh;
 }
 .lead{
   font-size: 15px !important;
@@ -18,6 +18,16 @@ footer h4{
   font-size: 15px;
 }
 .copyright{
+  z-index:3 !important;
+  position:relative;
+
+}
+.footer{
+  padding-left:2px !important;
+  padding-right: 2px !important;
+  padding-top: 20px !important;
+  padding-bottom: 0px !important;
+  display: block;
   z-index:3 !important;
   position:relative;
 

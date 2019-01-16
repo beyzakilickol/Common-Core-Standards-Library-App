@@ -37,7 +37,7 @@ class SellerRegistration extends Component{
     this.props.updateUserType()
     let nickname = this.state.nickname
     let paypalEmail = this.state.paypalEmail
-    axios.post('http://localhost:3002/api/sellerregister',{
+    axios.post('http://localhost:3001/api/sellerregister',{
      nickname : nickname,
      paypalEmail : paypalEmail,
      usertype : 'seller',

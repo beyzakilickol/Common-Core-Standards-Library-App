@@ -66,7 +66,11 @@ sendValueToStore = ()=>{
   history.push('/search')
 
 }
+sendproductid=(e)=>{
+  console.log(e.target.value)
+  this.props.sendProductIdForWholePage(e.target.value)
 
+}
 sendtomycart=(e)=>{
   console.log(e.target.value)
   axios.post('http://localhost:3001/api/sendtomycart',{
@@ -184,6 +188,7 @@ sendtomycart=(e)=>{
      const mapDispatchToProps = (dispatch) => {
        return {
          // this.props.onIncrementCounter
+         sendProductIdForWholePage : (value) => dispatch({type: "PRODUCTID",productid: value}),
            updatecartcount : (cartcount) => dispatch({type: "UPDATECARTCOUNT",cartcount:cartcount}),
  sendSearchValue : (value) => dispatch({type: "SEARCHVALUE", searchValue: value})
        }
