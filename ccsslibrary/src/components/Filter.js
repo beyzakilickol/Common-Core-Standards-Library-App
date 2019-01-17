@@ -47,7 +47,7 @@ filterByPrice = (e)=>{
   if(e.target.checked ==true){
      console.log(e.target.value)
      this.props.sendFilterValue(e.target.value)
-  
+    history.push('/standardworksheet')
   }
 
 }
@@ -55,7 +55,7 @@ filterByPrice = (e)=>{
 filterByResource = (e)=>{
   if(e.target.checked ==true){
   this.props.sendFilterValue(e.target.value)
-
+  history.push('/standardworksheet')
   }
 }
 

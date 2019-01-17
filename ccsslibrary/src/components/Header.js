@@ -35,7 +35,7 @@ class Header extends Component{
             </span></div>
           }
           if(!this.props.token==''){
-            withUser= <li className="nav-item dropdown"><a id="dropdown" className="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Welcome {this.props.username}</a>
+            withUser= <li className="nav-item dropdown"><a id="dropdown" className="dropdown-toggle nav-link usernameDiv" data-toggle="dropdown" aria-expanded="false" href="#">Welcome {this.props.username}</a>
               {withSellerUser}{withRegularUser}
             </li>
 

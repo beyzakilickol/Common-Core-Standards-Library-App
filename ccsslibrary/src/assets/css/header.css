@@ -7,7 +7,9 @@
 }
 #dropdown{
 margin-top: 8px;
-
+}
+.usernameDiv{
+  /* margin-left: 4rem !important; */
 }
 #navbarResponsive{
 margin-right: -46px !important;

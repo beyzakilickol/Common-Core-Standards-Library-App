@@ -73,7 +73,6 @@ componentDidMount=()=>{
          <div className="combineRating"><StarRatingComponent
  name="rate2"
  editing={false}
-
  starCount={5}
  value={Math.round(each.rating)}
 /> &nbsp;&nbsp;&nbsp;<p>{each.rating}</p></div>
