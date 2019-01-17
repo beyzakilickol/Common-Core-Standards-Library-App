@@ -29,7 +29,7 @@ componentDidMount=()=>{
        total: response.data.total,
 
      })
-     if(response.data.total==0.00){
+     if(response.data.response[0].length==0){
        this.setState({
          ...this.state,
          message: 'Your cart is empty!'
