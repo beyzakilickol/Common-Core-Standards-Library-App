@@ -87,8 +87,10 @@
 
 
  }
-.cardTitle{
-
+.subjectText{
+  white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .cardHr{
   color: #808080 !important;

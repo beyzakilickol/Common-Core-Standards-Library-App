@@ -51,11 +51,14 @@ componentWillReceiveProps =(props)=>{
     if(!response.data.length==0){
       this.setState({
         ...this.state,
+        standardsOfGrades : response.data,
         footer : <Footer/>
       })
+      window.location.reload();
     }else{
       this.setState({
         ...this.state,
+        standardsOfGrades : response.data,
         footer : ''
       })
     }
@@ -66,6 +69,7 @@ componentWillReceiveProps =(props)=>{
     })
   })
 }
+
 sendtomycart=(e)=>{
   console.log(e.target.value)
   axios.post('http://localhost:3001/api/sendtomycart',{

@@ -53,8 +53,8 @@ componentDidMount=()=>{
   render() {
    let elemItems = this.state.elem.map((each)=>{
      return <div className="col-md-4 offset-0 d-flex flex-column cust_blogteaser cardSelf" ><a href="#"><embed className='pdfDisplay3 img-fluid' src={each.fileurl} scroll="no" seamless="seamless" frameborder="0"></embed></a>
-         <h3 className="cardTitle">{each.title}</h3>
-         <p className="text-secondary cardText" >{each.standard.slice(0,75)+'...'}</p><p className="text-secondary cardText" >{each.grade} / {each.subject}<br/>
+         <h3 className="cardTitle">{each.title.slice(0,27)+'...'}</h3>
+         <p className="text-secondary cardText" >{each.standard.slice(0,75)+'...'}</p><p className="text-secondary cardText subjectText" >{each.grade} / {each.subject}<br/>
          <div className="combineRating"><StarRatingComponent
  name="rate2"
  editing={false}
@@ -68,8 +68,8 @@ componentDidMount=()=>{
    })
    let middleItems = this.state.middle.map((each)=>{
      return <div className="col-md-4 offset-0 d-flex flex-column cust_blogteaser cardSelf" ><a href="#"><embed className='pdfDisplay3 img-fluid' src={each.fileurl} scroll="no" seamless="seamless" frameborder="0"></embed></a>
-         <h3 className="cardTitle">{each.title}</h3>
-         <p className="text-secondary cardText" >{each.standard.slice(0,75)+'...'}</p><p className="text-secondary cardText" >{each.grade} / {each.subject}<br/>
+         <h3 className="cardTitle">{each.title.slice(0,27)+'...'}</h3>
+         <p className="text-secondary cardText" >{each.standard.slice(0,75)+'...'}</p><p className="text-secondary cardText subjectText" >{each.grade} / {each.subject}<br/>
          <div className="combineRating"><StarRatingComponent
  name="rate2"
  editing={false}
@@ -83,8 +83,8 @@ componentDidMount=()=>{
    })
    let highItems = this.state.high.map((each)=>{
      return <div className="col-md-4 offset-0 d-flex flex-column cust_blogteaser cardSelf" ><a href="#"><embed className='pdfDisplay3 img-fluid' src={each.fileurl} scroll="no" seamless="seamless" frameborder="0"></embed></a>
-         <h3 className="cardTitle">{each.title}</h3>
-         <p className="text-secondary cardText" >{each.standard.slice(0,75)+'...'}</p><p className="text-secondary cardText" >{each.grade} / {each.subject}<br/>
+         <h3 className="cardTitle">{each.title.slice(0,27)+'...'}</h3>
+         <p className="text-secondary cardText" >{each.standard.slice(0,75)+'...'}</p><p className="text-secondary cardText subjectText" >{each.grade} / {each.subject}<br/>
          <div className="combineRating"><StarRatingComponent
  name="rate2"
  editing={false}

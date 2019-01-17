@@ -47,7 +47,7 @@ filterByPrice = (e)=>{
   if(e.target.checked ==true){
      console.log(e.target.value)
      this.props.sendFilterValue(e.target.value)
-    history.push('/standardworksheet')
+  
   }
 
 }
@@ -55,7 +55,7 @@ filterByPrice = (e)=>{
 filterByResource = (e)=>{
   if(e.target.checked ==true){
   this.props.sendFilterValue(e.target.value)
-  history.push('/standardworksheet')
+
   }
 }
 
@@ -131,7 +131,7 @@ filterByResource = (e)=>{
        <p className="search-by-price">Search by Price</p>
        <div className="adjustment">
        <div className="price-container">
-        <input onChange={this.filterByPrice} className="priceLevel" type="radio" name="price" value="Free"/><label className="priceLabel">Free</label><br/>
+      <input onChange={this.filterByPrice} className="priceLevel" type="radio" name="price" value="Free"/><label className="priceLabel">Free</label><br/>
         <input onChange={this.filterByPrice} className="priceLevel" type="radio" name="price" value="Under $5"/><label className="priceLabel">Under $5</label><br/>
         <input onChange={this.filterByPrice} className="priceLevel" type="radio" name="price" value="$5 - $10"/><label className="priceLabel">$5 - $10</label><br/>
         <input onChange={this.filterByPrice} className="priceLevel" type="radio" name="price" value="$10 - $20"/><label className="priceLabel">$10 - $20</label><br/>

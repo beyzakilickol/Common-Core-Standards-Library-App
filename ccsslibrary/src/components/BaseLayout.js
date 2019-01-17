@@ -21,6 +21,7 @@ import LeaveReview from './LeaveReview'
 import Search from './Search'
 //------------css---------------
 import '../assets/bootstrap/css/bootstrap.min.css'
+import '../assets/css/responsive.css'
 import '../assets/fonts/font-awesome.min.css'
 import '../assets/css/Card-Group-Classic.css'
 import '../assets/css/dh-card-image-left-dark.css'

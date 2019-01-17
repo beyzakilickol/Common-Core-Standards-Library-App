@@ -212,7 +212,7 @@ app.post('/api/getcartitems',function(req,res){
       return parseFloat(each.price)
     })
     let total = prices.reduce((a,b)=>a+b,0).toFixed(2)
-
+     console.log(response)
     res.json({response:response,total:total})
   })
 })
