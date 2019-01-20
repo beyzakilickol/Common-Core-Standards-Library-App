@@ -25,6 +25,7 @@ import Standardworksheet from './components/Standardworksheet'
 import MyPurchases from './components/MyPurchases'
 import LeaveReview from './components/LeaveReview'
 import Search from './components/Search'
+import Helps from './components/Helps'
 ReactDOM.render(<Provider store = {store}>
   <PersistGate loading={null} persistor={persistor}>
   <Router history={history}>
@@ -46,6 +47,7 @@ ReactDOM.render(<Provider store = {store}>
       <Route path="/standardworksheet" component={Standardworksheet} />
       <Route path="/leavereview" component={LeaveReview} />
         <Route path="/search" component={Search} />
+        <Route path="/help" component={Helps} />
     </Switch>
 
   </BaseLayout>

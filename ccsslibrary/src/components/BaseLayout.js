@@ -19,6 +19,7 @@ import Viewcart from './Viewcart'
 import Standardworksheet from './Standardworksheet'
 import LeaveReview from './LeaveReview'
 import Search from './Search'
+import Helps from './Helps'
 //------------css---------------
 import '../assets/bootstrap/css/bootstrap.min.css'
 import '../assets/css/responsive.css'

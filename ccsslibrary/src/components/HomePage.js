@@ -105,7 +105,7 @@ componentDidMount=()=>{
             <ul className="listItemUl">
               <Link to="/"><li className="listItemHeader">Home</li></Link>
               <Link to='/aboutus'><li className="listItemHeader">About Us</li></Link>
-              <li className="listItemHeader">Help</li>
+              <Link to='/help'><li className="listItemHeader">Help</li></Link>
               <li className="listItemHeader">Schools</li>
               <hr />
             </ul>
