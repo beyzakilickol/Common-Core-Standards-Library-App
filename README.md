@@ -25,3 +25,12 @@ There are two user interfaces in the app. Regular buyers and sellers. When a use
 Since the main purpose of this app is searching class resources based on the common core standards, the majority of side bar filtering consists of different grades > Subjects > Standards. When user click the standard, all resources in regards to this standard will be displayed on the home page.
 
 ![](filterbystandard.gif)
+## Filter by Price and Resource Type:
+There are 5 different type of resources and price ranges which are offered to users to make search for products. 
+
+![](filterbypriceresource.gif)
+## Filter by Search Box:
+When a seller post a product, he\she needs to enter some key words that is describing more about the resource as well as choosing standard and entering resource title. The search bar on the main page is designed to make search based on the these three components.
+
+![](filterbysearch.gif)
+
