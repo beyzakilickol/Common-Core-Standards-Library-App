@@ -41,7 +41,7 @@ After becoming a seller, user can post a product by entering all required inform
 All pages with product info cart are including 'Add to Cart' button to make shopping accessible in all different levels of searching. User can add the item to his/her cart, remove the item from cart or checkout by making payment. I have used Stripe Api for payment system.
 
 ![](addtocart.gif)
-## Leave a review and Rate Product After Purchasing:
+## Leave a Review and Rate Product After Purchasing:
 After making purchase, the app takes user to 'my purchases' page where user can see all items he/she purchased, print them whenever he/she wants, rate or leave a review based on the experience. Once the review is left, it is displayed on the product details page, given rating is calculated to find the average rating of the product.
 
 ![](rateprint.gif)
