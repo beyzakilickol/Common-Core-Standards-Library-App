@@ -32,5 +32,5 @@ There are 5 different type of resources and price ranges which are offered to us
 ## Filter by Search Box:
 When a seller post a product, he\she needs to enter some key words that is describing more about the resource as well as choosing standard and entering resource title. The search bar on the main page is designed to make search based on the these three components.
 
-![](filterbysearch.gif)
+![](searchbytyping.gif)
 
