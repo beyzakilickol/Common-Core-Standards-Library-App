@@ -22,7 +22,7 @@ There are two user interfaces in the app. Regular buyers and sellers. When a use
 
 ![](login.gif)
 ## Filter by Standards:
-Since the main purpose of this app is searching class resources based on the common core standards, the majority of side bar filtering consists of different grades > Subjects > Standards. When user click the standard, all resources in regards to this standard will be displayed on the home page.
+Since the main purpose of this app is searching class resources based on the common core standards, the majority of side bar filtering consists of different grades > Subjects > Standards. When user click the standard, all resources in regards to this standard will be displayed on the home page. Fol filterig side bar, I have utilized from rc-menu react package.
 
 ![](filterbystandard.gif)
 ## Filter by Price and Resource Type:
@@ -34,6 +34,10 @@ When a seller post a product, he\she needs to enter some key words that is descr
 
 ![](searchbytyping.gif)
 ## Post a Resource to sell:
-After becoming a seller, user can post a product by entering all required information and uploading a pdf format of resource. There is no limitation for number of pages being uploaded but it needs to be a pdf format. To be able to use pdf files, I saved all files being uploaded to a folder in the server side, used guid function to assign them a random and unique key, created a link for each pdf and sent this link to client side to display as response.
+After becoming a seller, user can post a product by entering all required information and uploading a pdf format of resource. There is no limitation for number of pages being uploaded but it needs to be a pdf format. To be able to use pdf files, I saved all files being uploaded to a folder in the server side, used guid function to assign them a random and unique key, created a link for each pdf and sent this link to client side to display as response. For description part of form, I have utilized from rich text editor react package.
 
 ![](postproduct.gif)
+## Add a Product to The Cart and Checkout:
+All pages with product info cart are including 'Add to Cart' button to make shopping accessible in all different levels of searching. User can add the item to his\her cart, remove the item from cart or checkout by making payment. I have used Stripe Api for payment system.
+
+![](addtocart.gif)
