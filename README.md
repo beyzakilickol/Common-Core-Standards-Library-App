@@ -33,4 +33,7 @@ There are 5 different type of resources and price ranges which are offered to us
 When a seller post a product, he\she needs to enter some key words that is describing more about the resource as well as choosing standard and entering resource title. The search bar on the main page is designed to make search based on the these three components.
 
 ![](searchbytyping.gif)
+## Post a Resource to sell:
+After becoming a seller, user can post a product by entering all required information and uploading a pdf format of resource. There is no limitation for number of pages being uploaded but it needs to be a pdf format. To be able to use pdf files, I saved all files being uploaded to a folder in the server side, used guid function to assign them a random and unique key, created a link for each pdf and sent this link to client side to display as response.
 
+![](postproduct.gif)
